@@ -2,7 +2,7 @@
 
 <i>Description du jeu:</i>
 
-Nous avons codé un jeu vidéo pour le trophée NSI permettant à l'utilisateur de jouer contre les représentants des autres arrondissements de Paris en participant à certains des sports présents aux Jeux Olympiques de Paris. Cependant, pour ajouter un peu de difficulté, si on rate certaines des épreuves sportives, nous pouvons être condamnés à mort.
+Nous avons codé un jeu vidéo pour le trophée NSI inspiré de la saga <i>Hunger Games</i> permettant à l'utilisateur de jouer contre les représentants des autres arrondissements de Paris en participant à certains des sports présents aux Jeux Olympiques de Paris. Cependant, pour ajouter un peu de difficulté, si on rate certaines des épreuves sportives, nous pouvons être condamnés à mort.
 
 <i>Contexte:</i>
 
