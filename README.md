@@ -1,5 +1,7 @@
 # Paris-Survival-Games
 
+<!-- <img src="Paris_Survival_Games_Logo.png" width="150" height="150"> -->
+
 <i>Description du jeu:</i>
 
 Nous avons codé un jeu vidéo pour le trophée NSI inspiré de la saga <i>Hunger Games</i> permettant à l'utilisateur de jouer contre les représentants des autres arrondissements de Paris en participant à certains des sports présents aux Jeux Olympiques de Paris. Cependant, pour ajouter un peu de difficulté, si on rate certaines des épreuves sportives, nous pouvons être condamnés à mort.
