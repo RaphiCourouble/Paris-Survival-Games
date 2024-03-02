@@ -9,4 +9,4 @@ pygame.init()
 screen_width = 1080
 screen_height = 720
 fps = 60
-logo = pygame.image.load("Paris_Survival_Games_Logo.png")
+logo = pygame.image.load("images/Paris_Survival_Games_Logo.png")
