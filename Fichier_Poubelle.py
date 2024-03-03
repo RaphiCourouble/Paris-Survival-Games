@@ -5,22 +5,20 @@ import pygame
 
 pygame.init()
 
-
-mc_image = pygame.image.load("images/Image-Première-Version.png")
+mc_image_originale = pygame.image.load("images/Image-Première-Version.png")
+mc_image_scaled = pygame.transform.scale(mc_image_originale, (200, 400))
 mc_image_x = 0
 mc_image_y = 0
 velocity = 5
 
 
 def deplacement_droite(mc_image_x):
-
     mc_image_x = mc_image_x + velocity
 
     return mc_image_x
 
 
 def deplacement_gauche(mc_image_x):
-
     mc_image_x = mc_image_x - velocity
 
     return mc_image_x
@@ -41,7 +39,7 @@ while running:
 
     clock.tick(fps)
 
-    main_screen.blit(mc_image, (mc_image_x, mc_image_y))
+    main_screen.blit(mc_image_scaled, (mc_image_x, mc_image_y))
 
     pygame.display.flip()
 
@@ -58,7 +56,10 @@ while running:
             if event.key == pygame.K_RIGHT:
 
                 mc_image_x = deplacement_droite(mc_image_x)
+                main_screen.fill(black)
+                # pygame.draw.rect(main_screen, black, (mc_image_x, mc_image_y, 200, 400))
 
             elif event.key == pygame.K_LEFT:
 
                 mc_image_x = deplacement_gauche(mc_image_x)
+                main_screen.fill(black)
