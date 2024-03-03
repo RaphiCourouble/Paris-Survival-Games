@@ -6,7 +6,7 @@ import pygame
 pygame.init()
 
 
-mc_image = pygame.image.load("Image Première Version.png")
+mc_image = pygame.image.load("images/Image-Première-Version.png")
 mc_image_x = 0
 mc_image_y = 0
 velocity = 5
