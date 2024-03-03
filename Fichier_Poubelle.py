@@ -9,7 +9,6 @@ mc_image_originale = pygame.image.load("images/Image-Première-Version.png")
 mc_image_scaled = pygame.transform.scale(mc_image_originale, (200, 400))
 mc_image_x = 0
 mc_image_y = 0
-velocity = 5
 
 
 def deplacement_droite(mc_image_x):
@@ -55,11 +54,16 @@ while running:
 
             if event.key == pygame.K_RIGHT:
 
-                mc_image_x = deplacement_droite(mc_image_x)
-                main_screen.fill(black)
-                # pygame.draw.rect(main_screen, black, (mc_image_x, mc_image_y, 200, 400))
+                if mc_image_x + velocity < screen_width - 200:  # gestion des collisions vers la droite
+
+                    mc_image_x = deplacement_droite(mc_image_x)
+                    main_screen.fill(black)
+                    # pygame.draw.rect(main_screen, black, (mc_image_x, mc_image_y, 200, 400))
 
             elif event.key == pygame.K_LEFT:
 
-                mc_image_x = deplacement_gauche(mc_image_x)
-                main_screen.fill(black)
+                if mc_image_x + velocity > 0:  # gestion des collisions vers la gauche
+
+                    mc_image_x = deplacement_gauche(mc_image_x)
+                    main_screen.fill(black)
+                    # pygame.draw.rect(main_screen, black, (mc_image_x, mc_image_y, 200, 400))
