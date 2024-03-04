@@ -7,21 +7,35 @@ pygame.init()
 
 mc_image_originale = pygame.image.load("images/Image-Première-Version.png")
 mc_image_scaled = pygame.transform.scale(mc_image_originale, (200, 400))
-mc_image_x = 0
-mc_image_y = 0
+mc_image_x = 400
+mc_image_y = 200
 clock = pygame.time.Clock()
 
 
-def deplacement_droite(mc_image_x):
-    mc_image_x = mc_image_x + velocity
+# gestion des déplacements
 
-    return mc_image_x
+def deplacement_droite(mc_image_x):
+    mc_image_x_updated = mc_image_x + velocity
+
+    return mc_image_x_updated
 
 
 def deplacement_gauche(mc_image_x):
-    mc_image_x = mc_image_x - velocity
+    mc_image_x_updated = mc_image_x - velocity
 
-    return mc_image_x
+    return mc_image_x_updated
+
+
+def deplacement_haut(mc_image_y):
+    mc_image_y_updated = mc_image_y - velocity
+
+    return mc_image_y_updated
+
+
+def deplacement_bas(mc_image_y):
+    mc_image_y_updated = mc_image_y + velocity
+
+    return mc_image_y_updated
 
 
 # Création de l'écran principal
@@ -38,7 +52,7 @@ while running:
     clock.tick(fps)
 
     # affichage du personnage
-    main_screen.blit(mc_image_scaled, (mc_image_x, screen_height - mc_image_scaled.get_height()))
+    main_screen.blit(mc_image_scaled, (mc_image_x, mc_image_y))
     pygame.display.flip()
 
     # gestion des événements
