@@ -5,7 +5,7 @@ import pygame
 
 pygame.init()
 
-mc_image_originale = pygame.image.load("images/Image-Première-Version.png")
+mc_image_originale = pygame.image.load("images/Image_Main_Character.png")
 mc_image_scaled = pygame.transform.scale(mc_image_originale, (200, 400))
 mc_image_x = 400
 mc_image_y = 200
