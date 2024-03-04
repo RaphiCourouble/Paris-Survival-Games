@@ -9,6 +9,7 @@ mc_image_originale = pygame.image.load("images/Image-Première-Version.png")
 mc_image_scaled = pygame.transform.scale(mc_image_originale, (200, 400))
 mc_image_x = 0
 mc_image_y = 0
+clock = pygame.time.Clock()
 
 
 def deplacement_droite(mc_image_x):
@@ -32,8 +33,6 @@ main_screen = pygame.display.set_mode((screen_width, screen_height))
 # Boucle du jeu
 
 running = True
-clock = pygame.time.Clock()
-
 while running:
 
     clock.tick(fps)
@@ -42,7 +41,7 @@ while running:
     main_screen.blit(mc_image_scaled, (mc_image_x, screen_height - mc_image_scaled.get_height()))
     pygame.display.flip()
 
-    # gestion des evenements
+    # gestion des événements
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
