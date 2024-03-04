@@ -38,10 +38,11 @@ while running:
 
     clock.tick(fps)
 
-    main_screen.blit(mc_image_scaled, (mc_image_x, mc_image_y))
-
+    # affichage du personnage
+    main_screen.blit(mc_image_scaled, (mc_image_x, screen_height - mc_image_scaled.get_height()))
     pygame.display.flip()
 
+    # gestion des evenements
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
@@ -54,6 +55,7 @@ while running:
 
             if event.key == pygame.K_RIGHT:
 
+                # gestion des collisions vers la droite
                 if mc_image_x + velocity < screen_width - 200:  # gestion des collisions vers la droite
 
                     mc_image_x = deplacement_droite(mc_image_x)
@@ -62,8 +64,10 @@ while running:
 
             elif event.key == pygame.K_LEFT:
 
-                if mc_image_x + velocity > 0:  # gestion des collisions vers la gauche
-
+                # gestion des collisions vers la gauche
+                if mc_image_x + velocity > 0:
                     mc_image_x = deplacement_gauche(mc_image_x)
                     main_screen.fill(black)
                     # pygame.draw.rect(main_screen, black, (mc_image_x, mc_image_y, 200, 400))
+
+    main_screen.blit(logo, (-100, -250))
