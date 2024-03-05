@@ -35,11 +35,15 @@ main_screen = pygame.display.set_mode((screen_width, screen_height))
 running = True
 while running:
 
+    # mise à jour de l'écran
+
+    main_screen.blit(logo, (-100, -250))
     clock.tick(fps)
 
     # affichage du personnage
 
     main_screen.blit(personnages_images[frame_actuelle], (mc_image_x, mc_image_y))
+    pygame.display.flip()
 
     # gestion des événements
 
@@ -75,8 +79,3 @@ while running:
         frame_compteur += 1
         if frame_compteur % 10 == 0:  # Ajuster le nombre pour contrôler la vitesse de l'animation
             frame_actuelle = (frame_actuelle + 1) % len(personnages_images)
-
-    # mise à jour de l'écran
-
-    pygame.display.flip()
-    main_screen.blit(logo, (-100, -250))
