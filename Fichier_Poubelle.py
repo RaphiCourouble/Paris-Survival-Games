@@ -43,6 +43,14 @@ while running:
     # affichage du personnage et ses vies
 
     main_screen.blit(personnages_images[frame_actuelle], (mc_image_x, mc_image_y))
+    if vies == 4:
+        main_screen.blit(quatre_vies_scaled, (mc_image_x - 50, mc_image_y - 150))
+    elif vies == 3:
+        main_screen.blit(trois_vies_scaled, (mc_image_x - 50, mc_image_y - 150))
+    elif vies == 2:
+        main_screen.blit(deux_vies_scaled, (mc_image_x - 50, mc_image_y - 150))
+    elif vies == 1:
+        main_screen.blit(une_vie_scaled, (mc_image_x - 50, mc_image_y - 150))
     pygame.display.flip()
 
     # gestion des événements
@@ -86,14 +94,18 @@ while running:
 
         # Vérification de la position de l'utilisateur
 
-        player_life -= 1
-        mc_image_x = 0
-        mc_image_y = 0
-        print("Il ne vous reste plus que " + str(player_life) + "vie.")
+        vies -= 1
+        mc_image_x = 400
+        mc_image_y = 200
+        if vies > 1:
+            print("Il ne vous reste plus que " + str(vies) + " vies")
+        elif vies == 1:
+            print("Il ne vous reste plus que " + str(vies) + " vie")
 
         # quitter le jeu si le joueur n'a plus de vies
 
-        if player_life == 0:
+        if vies == 0:
             running = False
             pygame.quit()
+            print("Vous n'avez plus de vies, vous avez perdu")
             print("Le jeu est terminé.")
