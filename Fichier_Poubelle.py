@@ -40,7 +40,7 @@ while running:
     main_screen.blit(logo, (-100, -250))
     clock.tick(fps)
 
-    # affichage du personnage
+    # affichage du personnage et ses vies
 
     main_screen.blit(personnages_images[frame_actuelle], (mc_image_x, mc_image_y))
     pygame.display.flip()
@@ -79,3 +79,21 @@ while running:
         frame_compteur += 1
         if frame_compteur % 10 == 0:  # Ajuster le nombre pour contrôler la vitesse de l'animation
             frame_actuelle = (frame_actuelle + 1) % len(personnages_images)
+
+    # gestion des vies
+
+    if 200 < mc_image_x < 300 and 200 < mc_image_y < 300:
+
+        # Vérification de la position de l'utilisateur
+
+        player_life -= 1
+        mc_image_x = 0
+        mc_image_y = 0
+        print("Il ne vous reste plus que " + str(player_life) + "vie.")
+
+        # quitter le jeu si le joueur n'a plus de vies
+
+        if player_life == 0:
+            running = False
+            pygame.quit()
+            print("Le jeu est terminé.")
