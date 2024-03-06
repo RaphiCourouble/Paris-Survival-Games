@@ -80,6 +80,10 @@ while running:
         if mc_image_y + velocity < screen_height - 400:
             mc_image_y += velocity
             mouvement = True
+    if keys[pygame.K_r]:
+        running = False
+        pygame.quit()
+        print("Le jeu est terminé.")
 
     # gestion de l'animation
 
