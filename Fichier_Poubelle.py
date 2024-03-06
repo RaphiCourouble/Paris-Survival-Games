@@ -36,7 +36,15 @@ main_screen = pygame.display.set_mode((screen_width, screen_height))
 running = True
 while running:
 
-    # mise à jour de l'écran
+    # gestion des événements (pygame.quit())
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+            pygame.quit()
+            print("Le jeu est terminé.")
+
+    # mise à jour de l'écran et du background
 
     main_screen.blit(logo, (-100, -250))
     clock.tick(fps)
@@ -54,14 +62,6 @@ while running:
     elif vies == 1:
         main_screen.blit(une_vie_scaled, (mc_image_x - 50, mc_image_y - 150))
     pygame.display.flip()
-
-    # gestion des événements
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-            pygame.quit()
-            print("Le jeu est terminé.")
 
     # gestion des touches
     mouvement = False
@@ -114,5 +114,5 @@ while running:
         if vies == 0:
             running = False
             pygame.quit()
-            print("Vous n'avez plus de vies, vous avez perdu")
+            print("Vous n'avez plus de vies, vous avez perdu...")
             print("Le jeu est terminé.")
