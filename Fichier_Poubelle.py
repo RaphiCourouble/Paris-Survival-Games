@@ -80,7 +80,7 @@ while running:
         if mc_image_y + velocity < screen_height - 400:
             mc_image_y += velocity
             mouvement = True
-    if keys[pygame.K_r]:
+    if keys[pygame.K_SPACE]:
         running = False
         pygame.quit()
         print("Le jeu est terminé.")
