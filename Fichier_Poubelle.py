@@ -44,7 +44,7 @@ while running:
     # affichage du personnage et ses vies
 
     main_screen.blit(personnages_images[frame_actuelle], (mc_image_x, mc_image_y))
-    # main_screen.blit(personnages_images[0][frame_actuelle], (mc_image_x, mc_image_y))qqqqqqqqqqq
+    # main_screen.blit(personnages_images[0][frame_actuelle], (mc_image_x, mc_image_y))
     if vies == 4:
         main_screen.blit(quatre_vies_scaled, (mc_image_x - 50, mc_image_y - 150))
     elif vies == 3:
