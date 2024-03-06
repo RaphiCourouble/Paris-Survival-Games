@@ -64,19 +64,19 @@ while running:
     # gestion des touches
     mouvement = False
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_RIGHT]:
+    if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
         if mc_image_x + velocity < screen_width - 200:
             mc_image_x += velocity
             mouvement = True
-    if keys[pygame.K_LEFT]:
+    if keys[pygame.K_LEFT] or keys[pygame.K_q]:
         if mc_image_x - velocity > 0:
             mc_image_x -= velocity
             mouvement = True
-    if keys[pygame.K_UP]:
+    if keys[pygame.K_UP] or keys[pygame.K_z]:
         if mc_image_y - velocity > -50:
             mc_image_y -= velocity
             mouvement = True
-    if keys[pygame.K_DOWN]:
+    if keys[pygame.K_DOWN] or keys[pygame.K_s]:
         if mc_image_y + velocity < screen_height - 400:
             mc_image_y += velocity
             mouvement = True
