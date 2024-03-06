@@ -21,6 +21,7 @@ clock = pygame.time.Clock()
 # initialisation de la liste gérant l'animation pendant le déplacement
 
 personnages_images = [mc_image_scaled, mc_image_scaled2]
+# personnages_images = [[mc_image_scaled, mc_image_scaled2]]
 frame_actuelle = 0
 frame_compteur = 0
 
@@ -43,6 +44,7 @@ while running:
     # affichage du personnage et ses vies
 
     main_screen.blit(personnages_images[frame_actuelle], (mc_image_x, mc_image_y))
+    # main_screen.blit(personnages_images[0][frame_actuelle], (mc_image_x, mc_image_y))qqqqqqqqqqq
     if vies == 4:
         main_screen.blit(quatre_vies_scaled, (mc_image_x - 50, mc_image_y - 150))
     elif vies == 3:
@@ -91,6 +93,7 @@ while running:
         frame_compteur += 1
         if frame_compteur % 10 == 0:  # Ajuster le nombre pour contrôler la vitesse de l'animation
             frame_actuelle = (frame_actuelle + 1) % len(personnages_images)
+            # frame_actuelle = (frame_actuelle + 1) % len(personnages_images[0])
 
     # gestion des vies
 
