@@ -18,7 +18,7 @@ Au début, il avait été décidé de créer un jeu autour du sport, même si no
 
 C'est un projet un peu spécial car dès les premières recherches, nous avions déjà plusieurs idées ou "défis" que nous voulions réaliser et atteindre. Tout d'abbord, concernant la partie graphique et esthétique, nous voulions réaliser nous même nos fonds, nos images, nos cartes, nos personnages, etc... Et surtout, nous voulions rentrer dans le plus grand nombre de catégories de nominations possibles et se fier au programme de première: c'est pour çela que notre projet à pour but d'être réalisé 100% sans POO, quitte à revoir nos attentes à la baisse concernant son contenu mais surtout, pour surmonter un challenge supplémentaire qui ajoutera du prestige à la victoire!
 
-<i>Infromations supplémentaires:</i>
+<i>Informations supplémentaires:</i>
 
 Nous sommes l'équipe des <i>Paris Survival Games</i>: <b>Lara</b>, <b>Raphaël</b>, <b>Clément</b> et <b>Clara</b> et nous vous remercions, <b>vous</b> ,d'avoir pris le temps de regarder notre projet.
 Afin de lancer le jeu, il vous suffit de télécharger en .zip le contenu du GitHub, extraire ce dossier et enfin, ouvrir et lancer le "main.py". Bon jeu!<br/>
