@@ -19,6 +19,7 @@ mc_image = pygame.transform.scale(mc_image_original, (200, 400))
 mc_image_x = 0
 mc_image_y = 0
 velocity = 5
+
 player_life = 5
 vies = 4
 une_vie = pygame.image.load("images/une_vie.png")
