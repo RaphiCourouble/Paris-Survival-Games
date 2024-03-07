@@ -33,7 +33,7 @@ while running:
 
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_RIGHT] and mc_image_x < screen_width:
+    if keys[pygame.K_RIGHT] and mc_image_x < screen_width - 200:
 
         # Contrôle des déplacements vers la droite
 
@@ -51,7 +51,7 @@ while running:
 
         mc_image_y = mc_image_y - velocity
 
-    elif keys[pygame.K_DOWN] and mc_image_y < screen_height:
+    elif keys[pygame.K_DOWN] and mc_image_y < screen_height - 400:
 
         # Contrôle des déplacements vers le bas
 
