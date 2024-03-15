@@ -119,7 +119,7 @@ while running:
 
     elif vie == 1:
 
-        main_screen.blit(vie_2, (mc_image_x, mc_image_y))
+        main_screen.blit(vie_1, (mc_image_x, mc_image_y))
 
     # Vérification de la position de l'utilisateur
 
