@@ -76,18 +76,24 @@ while running:
         mc_image_y = mc_image_y + vitesse
         mouvement = True
 
-    """elif keys[pygame.K_SPACE]:
+    elif keys[pygame.K_SPACE]:
 
-        global arrow_mov
-        arrow_mov = True
-        arrow_x = mc_image_x + 150
-        arrow_y = mc_image_y + 75
-        main_screen.blit(arrow, (arrow_x, arrow_y))
+        fleche_x = mc_image_x + 150
+        fleche_y = mc_image_y + 75
 
-    if arrow_mov == True:
+        main_screen.blit(fleche, (fleche_x, fleche_y))
 
-        arrow_x = arrow_x + velocity
-        arrow_y = arrow_y + velocity"""
+        while fleche_x < 1080:
+
+            main_screen.fill(main_screen_color)
+            main_screen.blit(rocher, (200, 200))
+            main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+
+            fleche_x = fleche_x + 5
+
+            main_screen.blit(fleche, (fleche_x, fleche_y))
+
+            pygame.display.flip()
 
     # Changement d'images selon le mouvement du personnage
 
