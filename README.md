@@ -1,10 +1,8 @@
 # Paris-Survival-Games
 
-<img src="images/Paris_Survival_Games_Logo.png" width=200 height=200/>
-
 <i>Description du jeu:</i>
 
-Nous voulions un jeu vidéo pour les trophées NSI permettant à l'utilisateur de jouer contre les représentants des autres arrondissements de Paris en participant à certains des sports présents aux Jeux Olympiques de Paris. Cependant, pour ajouter un peu de difficulté, si on rate certaines des épreuves sportives, nous pouvons être condamnés à mort. Inspiré de la saga <i>Hunger Games</i>, notre jeu associe intelligemment sport, compétition, survie et culture parisienne.
+Nous avons conçu un jeu vidéo pour les trophées NSI permettant à l'utilisateur de jouer contre les représentants des autres arrondissements de Paris en participant à certains des sports présents aux Jeux Olympiques de Paris. Cependant, pour ajouter un peu de difficulté, si on rate certaines des épreuves sportives, nous pouvons être condamnés à mort. Inspiré de la saga <i>Hunger Games</i>, notre jeu associe intelligemment sport, compétition, survie et culture parisienne.
 
 <i>Contexte:</i>
 
@@ -16,11 +14,10 @@ Au début, il avait été décidé de créer un jeu autour du sport, même si no
 
 <i>Conception:</i>
 
-C'est un projet un peu spécial car dès les premières recherches, nous avions déjà plusieurs idées ou "défis" que nous voulions réaliser et atteindre. Tout d'abbord, concernant la partie graphique et esthétique, nous voulions réaliser nous même nos fonds, nos images, nos cartes, nos personnages, etc... Et surtout, nous voulions rentrer dans le plus grand nombre de catégories de nominations possibles et se fier au programme de première: c'est pour çela que notre projet à pour but d'être réalisé 100% sans POO, quitte à revoir nos attentes à la baisse concernant son contenu mais surtout, pour surmonter un challenge supplémentaire qui ajoutera du prestige à la victoire!
+C'est un projet un peu spécial car dès les premières recherches, nous avions déjà plusieurs idées ou "défis" que nous voulions réaliser et atteindre. Tout d'abbord, concernant la partie graphique et esthétique, nous voulions réaliser nous même nos fonds, nos images, nos cartes, nos personnages, etc... Et surtout, nous voulions rentrer dans le plus grand nombre de catégories possibles et se fier au programme de première: c'est pour çela que notre projet à pour but d'être réalisé 100% sans programation objet, même si il a fallut à plusierus reprises revoir nos attentes à la baisse.
 
 <i>Informations supplémentaires:</i>
 
-Nous sommes l'équipe des <i>Paris Survival Games</i>: <b>Lara</b>, <b>Raphaël</b>, <b>Clément</b> et <b>Clara</b> et nous vous remercions, <b>vous</b> ,d'avoir pris le temps de regarder notre projet.
-Afin de lancer le jeu, il vous suffit de télécharger en .zip le contenu du GitHub, extraire ce dossier et enfin, ouvrir et lancer le "main.py". Bon jeu!<br/>
+Nous sommes l'équipe des <i>Paris Survival Games</i>: <b>Lara</b>, <b>Raphaël</b>, <b>Clément</b> et <b>Clara</b> et nous vous remercions, d'avoir pris le temps de regarder notre projet. Afin de lancer le jeu, il vous suffit de télécharger en .zip le contenu du GitHub, extraire ce dossier et enfin, ouvrir et lancer le "main.py". Bon jeu!<br/>
 Si jamais vous rencontrez un problème, merci de contacter l'un des collaborateurs de ce projet.<br/>
-Nous tenions également à remercier Mr.Maurice, notre professeur de NSI; Quelques camarades, qui nous ont aidé de par leur expérience sur Github et enfin, tous les créateurs de contenu sur Internet qui nous ont grandement aidé lors de nos recherches, pour la prise en main de Pygame et son fonctionnement.
+Nous tenions également à remercier Mr.Maurice, notre professeur de NSI, ainsi que quelques camarades, qui nous ont aidé de par leur expérience sur Github et enfin, tous les créateurs de contenu sur Internet qui nous ont grandement aidé lors de nos recherches, pour la prise en main de Pygame et son fonctionnement.
