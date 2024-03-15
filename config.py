@@ -31,4 +31,5 @@ vie_3 = pygame.image.load("images/autres/Vie 3.png")
 vie_4 = pygame.image.load("images/autres/Vie 4.png")
 vie_5 = pygame.image.load("images/autres/Vie 5.png")
 
-fleche = pygame.image.load("images/autres/Fleche.png")
+fleche_original = pygame.image.load("images/autres/Fleche.png")
+fleche = pygame.transform.scale_by(fleche_original, 2)
