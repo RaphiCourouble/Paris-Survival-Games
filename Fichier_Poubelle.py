@@ -50,15 +50,28 @@ while running:
 
     main_screen.blit(personnages_images[frame_actuelle], (mc_image_x, mc_image_y))
     # main_screen.blit(personnages_images[0][frame_actuelle], (mc_image_x, mc_image_y))
-    if vies == 4:
-        main_screen.blit(quatre_vies_scaled, (mc_image_x - 75, mc_image_y - 150))
-    elif vies == 3:
-        main_screen.blit(trois_vies_scaled, (mc_image_x - 75, mc_image_y - 150))
-    elif vies == 2:
-        main_screen.blit(deux_vies_scaled, (mc_image_x - 75, mc_image_y - 150))
-    elif vies == 1:
-        main_screen.blit(une_vie_scaled, (mc_image_x - 75, mc_image_y - 150))
-    pygame.display.flip()
+
+    # Contrôle du nombre de vies
+
+    if vie == 5:
+
+        main_screen.blit(vie_5, (mc_image_x, mc_image_y))
+
+    elif vie == 4:
+
+        main_screen.blit(vie_4, (mc_image_x, mc_image_y))
+
+    elif vie == 3:
+
+        main_screen.blit(vie_3, (mc_image_x, mc_image_y))
+
+    elif vie == 2:
+
+        main_screen.blit(vie_2, (mc_image_x, mc_image_y))
+
+    elif vie == 1:
+
+        main_screen.blit(vie_1, (mc_image_x, mc_image_y))
 
     # gestion des touches
     mouvement = False
@@ -98,17 +111,17 @@ while running:
 
         # Vérification de la position de l'utilisateur
 
-        vies -= 1
+        vie -= 1
         mc_image_x = 400
         mc_image_y = 200
-        if vies > 1:
-            print("Il ne vous reste plus que " + str(vies) + " vies")
-        elif vies == 1:
-            print("Il ne vous reste plus que " + str(vies) + " vie")
+        if vie > 1:
+            print("Il ne vous reste plus que " + str(vie) + " vies")
+        elif vie == 1:
+            print("Il ne vous reste plus que " + str(vie) + " vie")
 
         # quitter le jeu si le joueur n'a plus de vies
 
-        if vies == 0:
+        if vie == 0:
             running = False
             pygame.quit()
             print("Vous n'avez plus de vies, vous avez perdu...")
