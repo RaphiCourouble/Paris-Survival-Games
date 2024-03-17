@@ -5,124 +5,151 @@ import pygame
 
 pygame.init()
 
-# Création des variables d'affichage de personnages
-
-mc_image = pygame.image.load("images/Main_Character_1.png")
-mc_image2 = pygame.image.load("images/Main_Character_2.png")
-
-mc_image_x = 400
-mc_image_y = 200
-
-clock = pygame.time.Clock()
-
-# initialisation de la liste gérant l'animation pendant le déplacement
-
-personnages_images = [mc_image, mc_image2]
-# personnages_images = [[mc_image_scaled, mc_image_scaled2]]
-frame_actuelle = 0
-frame_compteur = 0
-
 # Création de l'écran principal
 
 pygame.display.set_caption("Paris Survival Games")
 pygame.display.set_icon(logo)
 main_screen = pygame.display.set_mode((screen_width, screen_height))
 
+# Initialisation gérant animation pendant déplacement
+
+mc_image_liste = [mc_image_1, mc_image_2, mc_image_3]
+frame_actuelle = 0
+frame_compteur = 0
+
+mc_image_x = 0
+mc_image_y = 250
+
+clock = pygame.time.Clock()
+
 # Boucle du jeu
 
 running = True
 while running:
 
-    # gestion des événements (pygame.quit())
+    clock.tick(fps)
+
+    main_screen.fill(main_screen_color)
+
+    # Affichage du rocher
+
+    main_screen.blit(rocher, (200, 200))
+
+    # Affichage du personnage
+
+    main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
 
     for event in pygame.event.get():
+
         if event.type == pygame.QUIT:
+
             running = False
             pygame.quit()
             print("Le jeu est terminé.")
 
-    # mise à jour de l'écran et du background
+    mouvement = False
 
-    main_screen.blit(logo, (-100, -250))
-    clock.tick(fps)
+    keys = pygame.key.get_pressed()
 
-    # affichage du personnage et ses vies
+    if keys[pygame.K_RIGHT] or keys[pygame.K_d] and mc_image_x + vitesse < screen_width - 180:
 
-    main_screen.blit(personnages_images[frame_actuelle], (mc_image_x, mc_image_y))
-    # main_screen.blit(personnages_images[0][frame_actuelle], (mc_image_x, mc_image_y))
+        # Contrôle des déplacements vers la droite
+
+        mc_image_x += vitesse
+        mouvement = True
+
+    elif keys[pygame.K_LEFT] or keys[pygame.K_q] and mc_image_x > 0:
+
+        # Contrôle des déplacements vers la gauche
+
+        mc_image_x -= vitesse
+        mouvement = True
+
+    elif keys[pygame.K_UP] or keys[pygame.K_z] and mc_image_y > 0:
+
+        # Contrôle des déplacements vers le haut
+
+        mc_image_y -= vitesse
+        mouvement = True
+
+    elif keys[pygame.K_DOWN] or keys[pygame.K_s] and mc_image_y - vitesse < screen_height - 210:
+
+        # Contrôle des déplacements vers le bas
+
+        mc_image_y += vitesse
+        mouvement = True
+
+    elif keys[pygame.K_SPACE]:
+
+        fleche_x = mc_image_x + 150
+        fleche_y = mc_image_y + 75
+
+        main_screen.blit(fleche, (fleche_x, fleche_y))
+
+        while fleche_x < 1080:
+
+            main_screen.fill(main_screen_color)
+            main_screen.blit(rocher, (200, 200))
+            main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+
+            fleche_x = fleche_x + 2
+
+            main_screen.blit(fleche, (fleche_x, fleche_y))
+
+            pygame.display.flip()
+
+    # Changement d'images selon le mouvement du personnage
+
+    if mouvement:
+
+        frame_compteur += 1
+
+        if frame_compteur % 10 == 0:
+
+            frame_actuelle = (frame_actuelle + 1) % len(mc_image_liste)
 
     # Contrôle du nombre de vies
 
     if vie == 5:
 
-        main_screen.blit(vie_5, (mc_image_x, mc_image_y))
+        main_screen.blit(vie_5, (mc_image_x + 65, mc_image_y - 10))
 
     elif vie == 4:
 
-        main_screen.blit(vie_4, (mc_image_x, mc_image_y))
+        main_screen.blit(vie_4, (mc_image_x + 65, mc_image_y - 20))
 
     elif vie == 3:
 
-        main_screen.blit(vie_3, (mc_image_x, mc_image_y))
+        main_screen.blit(vie_3, (mc_image_x + 65, mc_image_y - 20))
 
     elif vie == 2:
 
-        main_screen.blit(vie_2, (mc_image_x, mc_image_y))
+        main_screen.blit(vie_2, (mc_image_x + 65, mc_image_y - 20))
 
     elif vie == 1:
 
-        main_screen.blit(vie_1, (mc_image_x, mc_image_y))
+        main_screen.blit(vie_1, (mc_image_x + 65, mc_image_y - 20))
 
-    # gestion des touches
-    mouvement = False
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-        if mc_image_x + vitesse < screen_width - 180:
-            mc_image_x += vitesse
-            mouvement = True
-    if keys[pygame.K_LEFT] or keys[pygame.K_q]:
-        if mc_image_x - vitesse > 0:
-            mc_image_x -= vitesse
-            mouvement = True
-    if keys[pygame.K_UP] or keys[pygame.K_z]:
-        if mc_image_y - vitesse > -50:
-            mc_image_y -= vitesse
-            mouvement = True
-    if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-        if mc_image_y + vitesse < screen_height - 210:
-            mc_image_y += vitesse
-            mouvement = True
-    if keys[pygame.K_SPACE]:
-        running = False
-        pygame.quit()
-        print("Le jeu est terminé.")
+    # Vérification de la position de l'utilisateur
 
-    # gestion de l'animation
-
-    if mouvement:
-        frame_compteur += 1
-        if frame_compteur % 10 == 0:  # Ajuster le nombre pour contrôler la vitesse de l'animation
-            frame_actuelle = (frame_actuelle + 1) % len(personnages_images)
-            # frame_actuelle = (frame_actuelle + 1) % len(personnages_images[0])
-
-    # gestion des vies
-
-    if 200 < mc_image_x < 300 and 200 < mc_image_y < 300:
-
-        # Vérification de la position de l'utilisateur
+    if 200 < mc_image_x < 360 and 200 < mc_image_y < 360:
 
         vie -= 1
-        mc_image_x = 400
-        mc_image_y = 200
+        mc_image_x = 0
+        mc_image_y = 250
+
         if vie > 1:
-            print("Il ne vous reste plus que " + str(vie) + " vies")
+
+            print("Il ne vous reste plus que " + str(vie) + " vies.")
+
         elif vie == 1:
-            print("Il ne vous reste plus que " + str(vie) + " vie")
 
-        # quitter le jeu si le joueur n'a plus de vies
+            print("Il ne vous reste plus que " + str(vie) + " vie.")
 
-        if vie == 0:
+        elif vie == 0:
+
             running = False
             pygame.quit()
-            print("Vous n'avez plus de vies, vous avez perdu...")
             print("Le jeu est terminé.")
+
+    pygame.display.flip()
