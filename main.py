@@ -13,15 +13,18 @@ main_screen = pygame.display.set_mode((screen_width, screen_height))
 
 # Initialisation gérant animation pendant déplacement
 
-mc_image_liste = [mc_image_1, mc_image_2]
+mc_image_liste = [mc_image_1, mc_image_2, mc_image_3]
 frame_actuelle = 0
 frame_compteur = 0
+
+mc_image_x = 0
+mc_image_y = 250
+
+clock = pygame.time.Clock()
 
 # Boucle du jeu
 
 running = True
-clock = pygame.time.Clock()
-
 while running:
 
     clock.tick(fps)
@@ -48,32 +51,32 @@ while running:
 
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_RIGHT] and mc_image_x + vitesse < screen_width - 180:
+    if keys[pygame.K_RIGHT] or keys[pygame.K_d] and mc_image_x + vitesse < screen_width - 180:
 
         # Contrôle des déplacements vers la droite
 
-        mc_image_x = mc_image_x + vitesse
+        mc_image_x += vitesse
         mouvement = True
 
-    elif keys[pygame.K_LEFT] and mc_image_x > 0:
+    elif keys[pygame.K_LEFT] or keys[pygame.K_q] and mc_image_x > 0:
 
         # Contrôle des déplacements vers la gauche
 
-        mc_image_x = mc_image_x - vitesse
+        mc_image_x -= vitesse
         mouvement = True
 
-    elif keys[pygame.K_UP] and mc_image_y > 0:
+    elif keys[pygame.K_UP] or keys[pygame.K_z] and mc_image_y > 0:
 
         # Contrôle des déplacements vers le haut
 
-        mc_image_y = mc_image_y - vitesse
+        mc_image_y -= vitesse
         mouvement = True
 
-    elif keys[pygame.K_DOWN] and mc_image_y - vitesse < screen_height - 210:
+    elif keys[pygame.K_DOWN] or keys[pygame.K_s] and mc_image_y - vitesse < screen_height - 210:
 
         # Contrôle des déplacements vers le bas
 
-        mc_image_y = mc_image_y + vitesse
+        mc_image_y += vitesse
         mouvement = True
 
     elif keys[pygame.K_SPACE]:
@@ -89,7 +92,7 @@ while running:
             main_screen.blit(rocher, (200, 200))
             main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
 
-            fleche_x = fleche_x + 5
+            fleche_x = fleche_x + 2
 
             main_screen.blit(fleche, (fleche_x, fleche_y))
 
@@ -109,23 +112,23 @@ while running:
 
     if vie == 5:
 
-        main_screen.blit(vie_5, (mc_image_x, mc_image_y))
+        main_screen.blit(vie_5, (mc_image_x + 65, mc_image_y - 10))
 
     elif vie == 4:
 
-        main_screen.blit(vie_4, (mc_image_x, mc_image_y))
+        main_screen.blit(vie_4, (mc_image_x + 65, mc_image_y - 20))
 
     elif vie == 3:
 
-        main_screen.blit(vie_3, (mc_image_x, mc_image_y))
+        main_screen.blit(vie_3, (mc_image_x + 65, mc_image_y - 20))
 
     elif vie == 2:
 
-        main_screen.blit(vie_2, (mc_image_x, mc_image_y))
+        main_screen.blit(vie_2, (mc_image_x + 65, mc_image_y - 20))
 
     elif vie == 1:
 
-        main_screen.blit(vie_1, (mc_image_x, mc_image_y))
+        main_screen.blit(vie_1, (mc_image_x + 65, mc_image_y - 20))
 
     # Vérification de la position de l'utilisateur
 
@@ -137,11 +140,11 @@ while running:
 
         if vie > 1:
 
-            print("Il ne vous reste plus que " + str(vie) + "vies.")
+            print("Il ne vous reste plus que " + str(vie) + " vies.")
 
         elif vie == 1:
 
-            print("Il ne vous reste plus que " + str(vie) + "vie.")
+            print("Il ne vous reste plus que " + str(vie) + " vie.")
 
         elif vie == 0:
 
