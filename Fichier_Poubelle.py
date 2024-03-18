@@ -2,6 +2,7 @@
 
 from config import *
 import pygame
+# from random import *
 
 pygame.init()
 
@@ -22,6 +23,10 @@ mc_image_y = 250
 
 clock = pygame.time.Clock()
 
+'''
+ennemis = []
+'''
+
 # Boucle du jeu
 
 running = True
@@ -30,6 +35,14 @@ while running:
     clock.tick(fps)
 
     main_screen.fill(main_screen_color)
+
+    '''
+    if len(ennemis) < 3:
+        ennemi_x = randint(0, 750)
+        ennemi_y = randint(0, 550)
+        direction = choice(["haut", "bas", "gauche", "droite"])
+        ennemis.append([ennemi_x, ennemi_y, direction])
+    '''
 
     # Affichage du rocher
 
@@ -46,6 +59,27 @@ while running:
             running = False
             pygame.quit()
             print("Le jeu est terminé.")
+
+    '''
+    for ennemi in ennemis:
+        if ennemi[2] == "haut":
+            ennemi[1] -= 2
+            ennemi[0] += 1
+        elif ennemi[2] == "bas":
+            ennemi[1] += 2
+            ennemi[0] += 3
+        elif ennemi[2] == "gauche":
+            ennemi[0] -= 2
+            ennemi[1] -= 4
+        elif ennemi[2] == "droite":
+            ennemi[0] += 2
+            ennemi[1] += 2.5
+
+    for ennemi in ennemis:
+        main_screen.blit(mc_image_1, (ennemi[0], ennemi[1], 50, 50))
+    '''
+
+    # gestion des déplacements
 
     mouvement = False
 
