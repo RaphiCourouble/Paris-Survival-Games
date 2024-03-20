@@ -28,7 +28,7 @@ ennemis = []
 '''
 
 # taille de la carte2: 68x16 pixels, 45x16 pixels
-carte = pytmx.load_pygame("images/tilemap/carte2.tmx")
+carte = pytmx.load_pygame("images/tilemap/carte.tmx")
 carte_x = 0
 carte_y = 0
 
