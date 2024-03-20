@@ -2,7 +2,7 @@
 
 from config import *
 import pygame
-#import pytmx
+import pytmx
 # from random import *
 
 pygame.init()
@@ -28,6 +28,8 @@ clock = pygame.time.Clock()
 ennemis = []
 '''
 
+carte = pytmx.load_pygame("images/tilemap/carte.tmx")
+
 # Boucle du jeu
 
 running = True
@@ -35,7 +37,12 @@ while running:
 
     clock.tick(fps)
 
-    main_screen.fill(main_screen_color)
+    for layer in carte.visible_layers:
+        if isinstance(layer, pytmx.TiledTileLayer):
+            for x, y, gid in layer:
+                tile = carte.get_tile_image_by_gid(gid)
+                if tile:
+                    main_screen.blit(tile, (x * carte.tilewidth, y * carte.tileheight))
 
     '''
     if len(ennemis) < 3:
@@ -44,10 +51,6 @@ while running:
         direction = choice(["haut", "bas", "gauche", "droite"])
         ennemis.append([ennemi_x, ennemi_y, direction])
     '''
-
-    # Affichage du rocher
-
-    main_screen.blit(rocher, (200, 200))
 
     # Affichage du personnage
 
