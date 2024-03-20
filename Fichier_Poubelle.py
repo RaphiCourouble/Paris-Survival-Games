@@ -1,5 +1,4 @@
 # Importation des différents modules
-
 from config import *
 import pygame
 import pytmx
