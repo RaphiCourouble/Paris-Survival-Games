@@ -15,7 +15,7 @@ main_screen = pygame.display.set_mode((screen_width, screen_height))
 
 # Initialisation gérant animation pendant déplacement
 
-mc_image_liste = [mc_image_1, mc_image_2, mc_image_3]
+mc_image_liste = [mc_image_1_test, mc_image_2_test, mc_image_3_test]
 frame_actuelle = 0
 frame_compteur = 0
 
@@ -28,7 +28,8 @@ clock = pygame.time.Clock()
 ennemis = []
 '''
 
-carte = pytmx.load_pygame("images/tilemap/carte.tmx")
+# taille de la carte2: 68x16 pixels, 45x16 pixels
+carte = pytmx.load_pygame("images/tilemap/carte2.tmx")
 carte_x = 0
 carte_y = 0
 
