@@ -19,8 +19,8 @@ mc_image_liste = [mc_image_1_test, mc_image_2_test, mc_image_3_test]
 frame_actuelle = 0
 frame_compteur = 0
 
-mc_image_x = 0
-mc_image_y = 250
+mc_image_x = 450
+mc_image_y = 300
 
 clock = pygame.time.Clock()
 
@@ -94,32 +94,36 @@ while running:
 
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_RIGHT] or keys[pygame.K_d] and mc_image_x + vitesse < screen_width - 180:
+    if (keys[pygame.K_RIGHT] and mc_image_x + vitesse < screen_width - 180
+            or keys[pygame.K_d] and mc_image_x + vitesse < screen_width - 180):
 
         # Contrôle des déplacements vers la droite
 
-        mc_image_x += vitesse
+        carte_x -= vitesse
         mouvement = True
 
-    elif keys[pygame.K_LEFT] or keys[pygame.K_q] and mc_image_x > 0:
+    elif (keys[pygame.K_LEFT] and mc_image_x > 0
+          or keys[pygame.K_q] and mc_image_x > 0):
 
         # Contrôle des déplacements vers la gauche
 
-        mc_image_x -= vitesse
+        carte_x += vitesse
         mouvement = True
 
-    elif keys[pygame.K_UP] or keys[pygame.K_z] and mc_image_y > 0:
+    elif (keys[pygame.K_UP] and mc_image_y > 0
+          or keys[pygame.K_z] and mc_image_y > 0):
 
         # Contrôle des déplacements vers le haut
 
-        mc_image_y -= vitesse
+        carte_y += vitesse
         mouvement = True
 
-    elif keys[pygame.K_DOWN] or keys[pygame.K_s] and mc_image_y - vitesse < screen_height - 210:
+    elif (keys[pygame.K_DOWN] and mc_image_y - vitesse < screen_height - 210
+          or keys[pygame.K_s] and mc_image_y - vitesse < screen_height - 210):
 
         # Contrôle des déplacements vers le bas
 
-        mc_image_y += vitesse
+        carte_y -= vitesse
         mouvement = True
 
     elif keys[pygame.K_SPACE]:
@@ -178,8 +182,8 @@ while running:
     if 200 < mc_image_x < 360 and 200 < mc_image_y < 360:
 
         vie -= 1
-        mc_image_x = 0
-        mc_image_y = 250
+        mc_image_x = 450
+        mc_image_y = 300
 
         if vie > 1:
 
