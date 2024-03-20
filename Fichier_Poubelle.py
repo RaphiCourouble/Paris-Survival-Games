@@ -29,6 +29,8 @@ ennemis = []
 '''
 
 carte = pytmx.load_pygame("images/tilemap/carte.tmx")
+carte_x = 0
+carte_y = 0
 
 # Boucle du jeu
 
@@ -37,12 +39,14 @@ while running:
 
     clock.tick(fps)
 
+    main_screen.fill(main_screen_color)
+
     for layer in carte.visible_layers:
         if isinstance(layer, pytmx.TiledTileLayer):
             for x, y, gid in layer:
                 tile = carte.get_tile_image_by_gid(gid)
                 if tile:
-                    main_screen.blit(tile, (x * carte.tilewidth, y * carte.tileheight))
+                    main_screen.blit(tile, (x * carte.tilewidth + carte_x, y * carte.tileheight + carte_y))
 
     '''
     if len(ennemis) < 3:
