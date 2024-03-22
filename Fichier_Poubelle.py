@@ -1,7 +1,6 @@
 # Importation des différents modules
 from config import *
 import pygame
-import pytmx
 # from random import *
 
 pygame.init()
@@ -27,11 +26,6 @@ clock = pygame.time.Clock()
 ennemis = []
 '''
 
-# taille de la carte2: 68x16 pixels, 45x16 pixels
-carte = pytmx.load_pygame("images/tilemap/carte2.tmx")
-carte_x = 0
-carte_y = 0
-
 # Boucle du jeu
 
 running = True
@@ -40,13 +34,6 @@ while running:
     clock.tick(fps)
 
     main_screen.fill(main_screen_color)
-
-    for layer in carte.visible_layers:
-        if isinstance(layer, pytmx.TiledTileLayer):
-            for x, y, gid in layer:
-                tile = carte.get_tile_image_by_gid(gid)
-                if tile:
-                    main_screen.blit(tile, (x * carte.tilewidth + carte_x, y * carte.tileheight + carte_y))
 
     '''
     if len(ennemis) < 3:
@@ -93,36 +80,32 @@ while running:
 
     keys = pygame.key.get_pressed()
 
-    if (keys[pygame.K_RIGHT] and mc_image_x + vitesse < screen_width - 180
-            or keys[pygame.K_d] and mc_image_x + vitesse < screen_width - 180):
+    if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
 
         # Contrôle des déplacements vers la droite
 
-        carte_x -= vitesse
+        mc_image_x += vitesse
         mouvement = True
 
-    elif (keys[pygame.K_LEFT] and mc_image_x > 0
-          or keys[pygame.K_q] and mc_image_x > 0):
+    elif keys[pygame.K_LEFT] or keys[pygame.K_q]:
 
         # Contrôle des déplacements vers la gauche
 
-        carte_x += vitesse
+        mc_image_x -= vitesse
         mouvement = True
 
-    elif (keys[pygame.K_UP] and mc_image_y > 0
-          or keys[pygame.K_z] and mc_image_y > 0):
+    elif keys[pygame.K_UP] or keys[pygame.K_z]:
 
         # Contrôle des déplacements vers le haut
 
-        carte_y += vitesse
+        mc_image_y -= vitesse
         mouvement = True
 
-    elif (keys[pygame.K_DOWN] and mc_image_y - vitesse < screen_height - 210
-          or keys[pygame.K_s] and mc_image_y - vitesse < screen_height - 210):
+    elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
 
         # Contrôle des déplacements vers le bas
 
-        carte_y -= vitesse
+        mc_image_y += vitesse
         mouvement = True
 
     elif keys[pygame.K_SPACE]:
@@ -135,7 +118,6 @@ while running:
         while fleche_x < 1080:
 
             main_screen.fill(main_screen_color)
-            main_screen.blit(rocher, (200, 200))
             main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
 
             fleche_x = fleche_x + 2
@@ -158,23 +140,23 @@ while running:
 
     if vie == 5:
 
-        main_screen.blit(vie_5, (mc_image_x + 65, mc_image_y - 10))
+        main_screen.blit(vie_5, (mc_image_x + 50, mc_image_y - 10))
 
     elif vie == 4:
 
-        main_screen.blit(vie_4, (mc_image_x + 65, mc_image_y - 20))
+        main_screen.blit(vie_4, (mc_image_x + 55, mc_image_y - 20))
 
     elif vie == 3:
 
-        main_screen.blit(vie_3, (mc_image_x + 65, mc_image_y - 20))
+        main_screen.blit(vie_3, (mc_image_x + 57, mc_image_y - 20))
 
     elif vie == 2:
 
-        main_screen.blit(vie_2, (mc_image_x + 65, mc_image_y - 20))
+        main_screen.blit(vie_2, (mc_image_x + 59, mc_image_y - 20))
 
     elif vie == 1:
 
-        main_screen.blit(vie_1, (mc_image_x + 65, mc_image_y - 20))
+        main_screen.blit(vie_1, (mc_image_x + 60, mc_image_y - 20))
 
     # Vérification de la position de l'utilisateur
 
