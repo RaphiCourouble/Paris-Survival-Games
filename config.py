@@ -43,3 +43,8 @@ fleche_original = pygame.image.load("images/autres/Fleche.png")
 fleche = pygame.transform.scale_by(fleche_original, 2)
 
 bg_tir_a_larc = pygame.image.load("images/tir_a_larc.png")
+
+cible_originale = pygame.image.load("images/target.png")
+cible = pygame.transform.scale_by(cible_originale, 6.5)
+cible_x = 720
+cible_y = 0

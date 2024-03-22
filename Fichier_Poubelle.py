@@ -23,10 +23,6 @@ mc_image_y = 300
 
 clock = pygame.time.Clock()
 
-'''
-ennemis = []
-'''
-
 # Boucle du jeu
 
 running = True
@@ -37,14 +33,6 @@ while running:
     main_screen.fill(main_screen_color)
     main_screen.blit(bg_tir_a_larc, (80, 0))
 
-    '''
-    if len(ennemis) < 3:
-        ennemi_x = randint(0, 750)
-        ennemi_y = randint(0, 550)
-        direction = choice(["haut", "bas", "gauche", "droite"])
-        ennemis.append([ennemi_x, ennemi_y, direction])
-    '''
-
     # Affichage du personnage
 
     for event in pygame.event.get():
@@ -53,25 +41,6 @@ while running:
             running = False
             pygame.quit()
             print("Le jeu est terminé.")
-
-    '''
-    for ennemi in ennemis:
-        if ennemi[2] == "haut":
-            ennemi[1] -= 2
-            ennemi[0] += 1
-        elif ennemi[2] == "bas":
-            ennemi[1] += 2
-            ennemi[0] += 3
-        elif ennemi[2] == "gauche":
-            ennemi[0] -= 2
-            ennemi[1] -= 4
-        elif ennemi[2] == "droite":
-            ennemi[0] += 2
-            ennemi[1] += 2.5
-
-    for ennemi in ennemis:
-        main_screen.blit(mc_image_1, (ennemi[0], ennemi[1], 50, 50))
-    '''
 
     # gestion des déplacements
 
@@ -128,6 +97,8 @@ while running:
             main_screen.blit(fleche, (fleche_x, fleche_y))
 
             pygame.display.flip()
+
+    main_screen.blit(cible, (cible_x, cible_y))
 
     # Changement d'images selon le mouvement du personnage
 
