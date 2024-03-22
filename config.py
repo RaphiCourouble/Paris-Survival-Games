@@ -16,12 +16,17 @@ main_screen_color = (34, 139, 34)
 
 # Déclaration des variables liées au joueur
 
-mc_image_1 = pygame.image.load("images/Main_Character_1.png")
-mc_image_2 = pygame.image.load("images/Main_Character_2.png")
-mc_image_3 = pygame.image.load("images/Main_Character_3.png")
-mc_image_1_test = pygame.transform.scale_by(mc_image_1, 0.8)
-mc_image_2_test = pygame.transform.scale_by(mc_image_2, 0.8)
-mc_image_3_test = pygame.transform.scale_by(mc_image_3, 0.8)
+mc_image_face1 = pygame.image.load("images/Main_Character_1.png")
+mc_image_face2 = pygame.image.load("images/Main_Character_2.png")
+mc_image_face3 = pygame.image.load("images/Main_Character_3.png")
+mc_image_profil1 = pygame.image.load("images/Ethan profil-1.png.png")
+mc_image_profil2 = pygame.image.load("images/Ethan profil-2.png.png")
+mc_image_profil3 = pygame.image.load("images/Ethan profil-3.png.png")
+mc_image_profil4 = pygame.image.load("images/Ethan profil-4.png.png")
+mc_image_profil1_scaled = pygame.transform.scale_by(mc_image_profil1, 6)
+mc_image_profil2_scaled = pygame.transform.scale_by(mc_image_profil2, 6)
+mc_image_profil3_scaled = pygame.transform.scale_by(mc_image_profil3, 6)
+mc_image_profil4_scaled = pygame.transform.scale_by(mc_image_profil4, 6)
 
 mc_image_x = 0
 mc_image_y = 250
