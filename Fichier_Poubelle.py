@@ -35,6 +35,7 @@ while running:
     clock.tick(fps)
 
     main_screen.fill(main_screen_color)
+    main_screen.blit(bg_tir_a_larc, (80, 0))
 
     '''
     if len(ennemis) < 3:
@@ -115,13 +116,14 @@ while running:
         fleche_x = mc_image_x + 100
         fleche_y = mc_image_y + 50
 
-        main_screen.blit(fleche, (fleche_x, fleche_y))
-
         while fleche_x < 1080:
+
             main_screen.fill(main_screen_color)
+            main_screen.blit(bg_tir_a_larc, (80, 0))
+
             main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
 
-            fleche_x = fleche_x + 2
+            fleche_x = fleche_x + 20
 
             main_screen.blit(fleche, (fleche_x, fleche_y))
 

@@ -41,3 +41,5 @@ vie_5 = pygame.image.load("images/autres/Vie 5.png")
 
 fleche_original = pygame.image.load("images/autres/Fleche.png")
 fleche = pygame.transform.scale_by(fleche_original, 2)
+
+bg_tir_a_larc = pygame.image.load("images/tir_a_larc.png")
