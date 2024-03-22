@@ -48,3 +48,4 @@ cible_originale = pygame.image.load("images/target.png")
 cible = pygame.transform.scale_by(cible_originale, 6.5)
 cible_x = 720
 cible_y = 0
+vitesse_cible = 5

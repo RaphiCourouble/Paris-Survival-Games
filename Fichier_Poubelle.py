@@ -85,10 +85,11 @@ while running:
         fleche_x = mc_image_x + 100
         fleche_y = mc_image_y + 50
 
-        while fleche_x < 1080:
+        while fleche_x < 950:
 
             main_screen.fill(main_screen_color)
             main_screen.blit(bg_tir_a_larc, (80, 0))
+            main_screen.blit(cible, (cible_x + 120, cible_y))
 
             main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
 
@@ -98,8 +99,24 @@ while running:
 
             pygame.display.flip()
 
-    main_screen.blit(cible, (cible_x, cible_y))
+    # Contrôle de la cible
 
+    if cible_y < 500:
+        cible_y += vitesse_cible
+        main_screen.blit(cible, (cible_x + 120, cible_y))
+    elif cible_y >= 500:
+        cible_y -= vitesse_cible
+        main_screen.blit(cible, (cible_x + 120, cible_y))
+
+    """
+    if cible_y > screen_height:
+        cible_y += vitesse_cible
+        image_y = -cible.get_height()
+    elif cible_y < 0:
+        cible_y -= vitesse_cible
+        image_y = cible.get_height()
+    main_screen.blit(cible, (cible_x + 120, cible_y))
+"""
     # Changement d'images selon le mouvement du personnage
 
     if mouvement:
