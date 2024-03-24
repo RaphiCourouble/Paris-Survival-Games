@@ -216,3 +216,5 @@ while running:
         print("Le jeu est terminé.")
 
     pygame.display.flip()
+
+pygame.quit()
