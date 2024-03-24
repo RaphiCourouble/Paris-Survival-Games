@@ -104,17 +104,22 @@ while running:
         fleche_x = mc_image_x + 100
         fleche_y = mc_image_y + 50
 
+        while fleche_x < 980:
 
-
-        while fleche_x < 950:
-
+            fleche_rect = fleche.get_rect(topleft=(fleche_x, fleche_y))
+            cible_rect = cible.get_rect(topleft=(cible_x + 120, cible_y))
             main_screen.fill(main_screen_color)
             main_screen.blit(bg_tir_a_larc, (80, 0))
             main_screen.blit(cible, (cible_x + 120, cible_y))
+            main_screen.blit(arc, (mc_image_x + 95, mc_image_y + 40))
 
             main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
 
             fleche_x = fleche_x + 20
+
+            if cible_rect.colliderect(fleche_rect):
+                # Collision detected, perform actions here
+                score += 1
 
             main_screen.blit(fleche, (fleche_x, fleche_y))
 
@@ -130,27 +135,28 @@ while running:
                     mvt_cible = True
             main_screen.blit(cible, (cible_x + 120, cible_y))
 
-            if vie == 5:
+            if 49 < score < 59:
 
                 main_screen.blit(vie_5, (750, -65))
+                main_screen.blit(text_score, (100, 220))
 
-            elif vie == 4:
+            elif 39 < score < 49:
 
                 main_screen.blit(vie_4, (775, -60))
 
-            elif vie == 3:
+            elif 29 < score < 39:
 
                 main_screen.blit(vie_3, (795, -60))
 
-            elif vie == 2:
+            elif 19 < score < 29:
 
                 main_screen.blit(vie_2, (815, -60))
 
-            elif vie == 1:
+            elif 9 < score < 19:
 
                 main_screen.blit(vie_1, (835, -60))
 
-            elif vie <= 0:
+            elif score >= 60:
 
                 running = False
                 pygame.quit()
@@ -182,27 +188,28 @@ while running:
 
     # Contrôle du nombre de vies
 
-    if vie == 5:
+    if 49 < score < 59:
 
         main_screen.blit(vie_5, (750, -65))
+        main_screen.blit(text_score, (100, 220))
 
-    elif vie == 4:
+    elif 39 < score < 49:
 
         main_screen.blit(vie_4, (775, -60))
 
-    elif vie == 3:
+    elif 29 < score < 39:
 
         main_screen.blit(vie_3, (795, -60))
 
-    elif vie == 2:
+    elif 19 < score < 29:
 
         main_screen.blit(vie_2, (815, -60))
 
-    elif vie == 1:
+    elif 9 < score < 19:
 
         main_screen.blit(vie_1, (835, -60))
 
-    elif vie <= 0:
+    elif score >= 60:
 
         running = False
         pygame.quit()

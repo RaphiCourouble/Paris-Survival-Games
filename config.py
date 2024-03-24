@@ -32,7 +32,6 @@ mc_image_x = 0
 mc_image_y = 250
 vitesse = 5
 
-vie = 5
 vie_1_originale = pygame.image.load("images/autres/Vie 1.png")
 vie_2_originale = pygame.image.load("images/autres/Vie 2.png")
 vie_3_originale = pygame.image.load("images/autres/Vie 3.png")
@@ -61,3 +60,9 @@ rouge = (255, 0, 0)
 font = pygame.font.Font(None, 60)
 text_surface = font.render("Attention, vous mordez la ligne!", True, rouge)
 
+arc_original = pygame.image.load("images/arc.png")
+arc = pygame.transform.scale_by(arc_original, 3)
+
+score = 0
+jaune = (255, 255, 0)
+text_score = font.render("Dernière flêche pour gagner!", True, jaune)
