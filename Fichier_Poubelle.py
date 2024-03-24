@@ -7,7 +7,7 @@ pygame.font.init()
 
 # Création de l'écran principal
 
-pygame.display.set_caption("Paris Survival Games")
+pygame.display.set_caption("Paris Survival Games - Tir a l'arc ! ")
 pygame.display.set_icon(logo)
 main_screen = pygame.display.set_mode((screen_width, screen_height))
 
