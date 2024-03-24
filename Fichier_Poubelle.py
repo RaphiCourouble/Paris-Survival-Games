@@ -340,5 +340,4 @@ def menu():
         pygame.display.flip()
 '''
 
-
 jeu()

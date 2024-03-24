@@ -51,7 +51,7 @@ bg_tir_a_larc = pygame.image.load("images/tir_a_larc.png")
 cible_originale = pygame.image.load("images/target.png")
 cible = pygame.transform.scale_by(cible_originale, 6.5)
 
-vitesse_cible = 8 # avant: 5
+vitesse_cible = 8  # avant: 5
 mvt_cible = True
 cible_x = 720
 cible_y = 0
