@@ -2,9 +2,8 @@
 from config import *
 import pygame
 
-# from random import *
-
 pygame.init()
+pygame.font.init()
 
 # Création de l'écran principal
 
@@ -52,38 +51,60 @@ while running:
 
         main_screen.blit(mc_image_face3, (mc_image_x, mc_image_y))
 
-    elif keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+    elif (keys[pygame.K_RIGHT] and mc_image_x + vitesse <= screen_width - 500
+          or keys[pygame.K_d] and mc_image_x + vitesse <= screen_width - 500):
 
         # Contrôle des déplacements vers la droite
         main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
         mc_image_x += vitesse
         mouvement = True
 
-    elif keys[pygame.K_LEFT] or keys[pygame.K_q]:
+    elif (keys[pygame.K_LEFT] and mc_image_x >= 0
+          or keys[pygame.K_q] and mc_image_x >= 0):
 
         # Contrôle des déplacements vers la gauche
         main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
         mc_image_x -= vitesse
         mouvement = True
 
-    elif keys[pygame.K_UP] or keys[pygame.K_z]:
+    elif (keys[pygame.K_UP] and mc_image_y >= 0
+          or keys[pygame.K_z] and mc_image_y >= 0):
 
         # Contrôle des déplacements vers le haut
         main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
         mc_image_y -= vitesse
         mouvement = True
 
-    elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
+    elif (keys[pygame.K_DOWN] and mc_image_y - vitesse <= screen_height - 210
+          or keys[pygame.K_s] and mc_image_y - vitesse <= screen_height - 210):
 
         # Contrôle des déplacements vers le bas
         main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
         mc_image_y += vitesse
         mouvement = True
 
+    elif mc_image_y == - 5:
+        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+        main_screen.blit(text_surface, (180, 220))
+
+    elif mc_image_y == 520:
+        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+        main_screen.blit(text_surface, (180, 220))
+
+    elif mc_image_x == - 5:
+        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+        main_screen.blit(text_surface, (180, 220))
+
+    elif mc_image_x == 580:
+        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+        main_screen.blit(text_surface, (180, 220))
+
     elif keys[pygame.K_SPACE]:
 
         fleche_x = mc_image_x + 100
         fleche_y = mc_image_y + 50
+
+
 
         while fleche_x < 950:
 
@@ -97,26 +118,59 @@ while running:
 
             main_screen.blit(fleche, (fleche_x, fleche_y))
 
+            if mvt_cible:
+                cible_y += vitesse_cible - 1
+                if cible_y >= 500:  # Si la cible atteint la limite basse
+                    cible_y = 500
+                    mvt_cible = False  # Changer la direction
+            else:  # Si la cible se déplace vers le haut
+                cible_y -= vitesse_cible - 1
+                if cible_y <= 0:  # Si la cible atteint la limite haute
+                    cible_y = 0
+                    mvt_cible = True
+            main_screen.blit(cible, (cible_x + 120, cible_y))
+
+            if vie == 5:
+
+                main_screen.blit(vie_5, (750, -65))
+
+            elif vie == 4:
+
+                main_screen.blit(vie_4, (775, -60))
+
+            elif vie == 3:
+
+                main_screen.blit(vie_3, (795, -60))
+
+            elif vie == 2:
+
+                main_screen.blit(vie_2, (815, -60))
+
+            elif vie == 1:
+
+                main_screen.blit(vie_1, (835, -60))
+
+            elif vie <= 0:
+
+                running = False
+                pygame.quit()
+                print("Le jeu est terminé.")
+
             pygame.display.flip()
 
-    # Contrôle de la cible
+    # Contrôle de la cible en dehors de l'animation de la flèche
 
-    if cible_y < 500:
+    if mvt_cible:
         cible_y += vitesse_cible
-        main_screen.blit(cible, (cible_x + 120, cible_y))
-    elif cible_y >= 500:
+        if cible_y >= 500:  # Si la cible atteint la limite basse
+            cible_y = 500
+            mvt_cible = False  # Changer la direction
+    else:  # Si la cible se déplace vers le haut
         cible_y -= vitesse_cible
-        main_screen.blit(cible, (cible_x + 120, cible_y))
-
-    """
-    if cible_y > screen_height:
-        cible_y += vitesse_cible
-        image_y = -cible.get_height()
-    elif cible_y < 0:
-        cible_y -= vitesse_cible
-        image_y = cible.get_height()
+        if cible_y <= 0:  # Si la cible atteint la limite haute
+            cible_y = 0
+            mvt_cible = True
     main_screen.blit(cible, (cible_x + 120, cible_y))
-"""
     # Changement d'images selon le mouvement du personnage
 
     if mouvement:
@@ -130,44 +184,28 @@ while running:
 
     if vie == 5:
 
-        main_screen.blit(vie_5, (mc_image_x + 60, mc_image_y - 10))
+        main_screen.blit(vie_5, (750, -65))
 
     elif vie == 4:
 
-        main_screen.blit(vie_4, (mc_image_x + 62, mc_image_y - 20))
+        main_screen.blit(vie_4, (775, -60))
 
     elif vie == 3:
 
-        main_screen.blit(vie_3, (mc_image_x + 64, mc_image_y - 20))
+        main_screen.blit(vie_3, (795, -60))
 
     elif vie == 2:
 
-        main_screen.blit(vie_2, (mc_image_x + 66, mc_image_y - 20))
+        main_screen.blit(vie_2, (815, -60))
 
     elif vie == 1:
 
-        main_screen.blit(vie_1, (mc_image_x + 60, mc_image_y - 20))
+        main_screen.blit(vie_1, (835, -60))
 
-    # Vérification de la position de l'utilisateur
+    elif vie <= 0:
 
-    '''if 200 < mc_image_x < 360 and 200 < mc_image_y < 360:
-
-        vie -= 1
-        mc_image_x = 450
-        mc_image_y = 300
-
-        if vie > 1:
-
-            print("Il ne vous reste plus que " + str(vie) + " vies.")
-
-        elif vie == 1:
-
-            print("Il ne vous reste plus que " + str(vie) + " vie.")
-
-        elif vie == 0:
-
-            running = False
-            pygame.quit()
-            print("Le jeu est terminé.")'''
+        running = False
+        pygame.quit()
+        print("Le jeu est terminé.")
 
     pygame.display.flip()
