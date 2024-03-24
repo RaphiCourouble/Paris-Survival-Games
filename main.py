@@ -13,7 +13,7 @@ main_screen = pygame.display.set_mode((screen_width, screen_height))
 
 # Initialisation gérant animation pendant déplacement
 
-mc_image_liste = [mc_image_1, mc_image_2, mc_image_3]
+mc_image_liste = [mc_image_face1, mc_image_face2, mc_image_face3]
 frame_actuelle = 0
 frame_compteur = 0
 

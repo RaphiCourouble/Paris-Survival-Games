@@ -1,7 +1,7 @@
 # Importation des différents modules
 from config import *
 import pygame
-import pytmx
+
 # from random import *
 
 pygame.init()
@@ -14,7 +14,7 @@ main_screen = pygame.display.set_mode((screen_width, screen_height))
 
 # Initialisation gérant animation pendant déplacement
 
-mc_image_liste = [mc_image_1_test, mc_image_2_test, mc_image_3_test]
+mc_image_liste = [mc_image_profil1_scaled, mc_image_profil2_scaled, mc_image_profil3_scaled, mc_image_profil4_scaled]
 frame_actuelle = 0
 frame_compteur = 0
 
@@ -22,15 +22,6 @@ mc_image_x = 450
 mc_image_y = 300
 
 clock = pygame.time.Clock()
-
-'''
-ennemis = []
-'''
-
-# taille de la carte2: 68x16 pixels, 45x16 pixels
-carte = pytmx.load_pygame("images/tilemap/carte2.tmx")
-carte_x = 0
-carte_y = 0
 
 # Boucle du jeu
 
@@ -40,52 +31,16 @@ while running:
     clock.tick(fps)
 
     main_screen.fill(main_screen_color)
-
-    for layer in carte.visible_layers:
-        if isinstance(layer, pytmx.TiledTileLayer):
-            for x, y, gid in layer:
-                tile = carte.get_tile_image_by_gid(gid)
-                if tile:
-                    main_screen.blit(tile, (x * carte.tilewidth + carte_x, y * carte.tileheight + carte_y))
-
-    '''
-    if len(ennemis) < 3:
-        ennemi_x = randint(0, 750)
-        ennemi_y = randint(0, 550)
-        direction = choice(["haut", "bas", "gauche", "droite"])
-        ennemis.append([ennemi_x, ennemi_y, direction])
-    '''
+    main_screen.blit(bg_tir_a_larc, (80, 0))
 
     # Affichage du personnage
-
-    main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
 
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
-
             running = False
             pygame.quit()
             print("Le jeu est terminé.")
-
-    '''
-    for ennemi in ennemis:
-        if ennemi[2] == "haut":
-            ennemi[1] -= 2
-            ennemi[0] += 1
-        elif ennemi[2] == "bas":
-            ennemi[1] += 2
-            ennemi[0] += 3
-        elif ennemi[2] == "gauche":
-            ennemi[0] -= 2
-            ennemi[1] -= 4
-        elif ennemi[2] == "droite":
-            ennemi[0] += 2
-            ennemi[1] += 2.5
-
-    for ennemi in ennemis:
-        main_screen.blit(mc_image_1, (ennemi[0], ennemi[1], 50, 50))
-    '''
 
     # gestion des déplacements
 
@@ -93,57 +48,75 @@ while running:
 
     keys = pygame.key.get_pressed()
 
-    if (keys[pygame.K_RIGHT] and mc_image_x + vitesse < screen_width - 180
-            or keys[pygame.K_d] and mc_image_x + vitesse < screen_width - 180):
+    if all(not key for key in keys):
+
+        main_screen.blit(mc_image_face3, (mc_image_x, mc_image_y))
+
+    elif keys[pygame.K_RIGHT] or keys[pygame.K_d]:
 
         # Contrôle des déplacements vers la droite
-
-        carte_x -= vitesse
+        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+        mc_image_x += vitesse
         mouvement = True
 
-    elif (keys[pygame.K_LEFT] and mc_image_x > 0
-          or keys[pygame.K_q] and mc_image_x > 0):
+    elif keys[pygame.K_LEFT] or keys[pygame.K_q]:
 
         # Contrôle des déplacements vers la gauche
-
-        carte_x += vitesse
+        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+        mc_image_x -= vitesse
         mouvement = True
 
-    elif (keys[pygame.K_UP] and mc_image_y > 0
-          or keys[pygame.K_z] and mc_image_y > 0):
+    elif keys[pygame.K_UP] or keys[pygame.K_z]:
 
         # Contrôle des déplacements vers le haut
-
-        carte_y += vitesse
+        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+        mc_image_y -= vitesse
         mouvement = True
 
-    elif (keys[pygame.K_DOWN] and mc_image_y - vitesse < screen_height - 210
-          or keys[pygame.K_s] and mc_image_y - vitesse < screen_height - 210):
+    elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
 
         # Contrôle des déplacements vers le bas
-
-        carte_y -= vitesse
+        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+        mc_image_y += vitesse
         mouvement = True
 
     elif keys[pygame.K_SPACE]:
 
-        fleche_x = mc_image_x + 150
-        fleche_y = mc_image_y + 75
+        fleche_x = mc_image_x + 100
+        fleche_y = mc_image_y + 50
 
-        main_screen.blit(fleche, (fleche_x, fleche_y))
-
-        while fleche_x < 1080:
+        while fleche_x < 950:
 
             main_screen.fill(main_screen_color)
-            main_screen.blit(rocher, (200, 200))
+            main_screen.blit(bg_tir_a_larc, (80, 0))
+            main_screen.blit(cible, (cible_x + 120, cible_y))
+
             main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
 
-            fleche_x = fleche_x + 2
+            fleche_x = fleche_x + 20
 
             main_screen.blit(fleche, (fleche_x, fleche_y))
 
             pygame.display.flip()
 
+    # Contrôle de la cible
+
+    if cible_y < 500:
+        cible_y += vitesse_cible
+        main_screen.blit(cible, (cible_x + 120, cible_y))
+    elif cible_y >= 500:
+        cible_y -= vitesse_cible
+        main_screen.blit(cible, (cible_x + 120, cible_y))
+
+    """
+    if cible_y > screen_height:
+        cible_y += vitesse_cible
+        image_y = -cible.get_height()
+    elif cible_y < 0:
+        cible_y -= vitesse_cible
+        image_y = cible.get_height()
+    main_screen.blit(cible, (cible_x + 120, cible_y))
+"""
     # Changement d'images selon le mouvement du personnage
 
     if mouvement:
@@ -151,34 +124,33 @@ while running:
         frame_compteur += 1
 
         if frame_compteur % 10 == 0:
-
             frame_actuelle = (frame_actuelle + 1) % len(mc_image_liste)
 
     # Contrôle du nombre de vies
 
     if vie == 5:
 
-        main_screen.blit(vie_5, (mc_image_x + 65, mc_image_y - 10))
+        main_screen.blit(vie_5, (mc_image_x + 60, mc_image_y - 10))
 
     elif vie == 4:
 
-        main_screen.blit(vie_4, (mc_image_x + 65, mc_image_y - 20))
+        main_screen.blit(vie_4, (mc_image_x + 62, mc_image_y - 20))
 
     elif vie == 3:
 
-        main_screen.blit(vie_3, (mc_image_x + 65, mc_image_y - 20))
+        main_screen.blit(vie_3, (mc_image_x + 64, mc_image_y - 20))
 
     elif vie == 2:
 
-        main_screen.blit(vie_2, (mc_image_x + 65, mc_image_y - 20))
+        main_screen.blit(vie_2, (mc_image_x + 66, mc_image_y - 20))
 
     elif vie == 1:
 
-        main_screen.blit(vie_1, (mc_image_x + 65, mc_image_y - 20))
+        main_screen.blit(vie_1, (mc_image_x + 60, mc_image_y - 20))
 
     # Vérification de la position de l'utilisateur
 
-    if 200 < mc_image_x < 360 and 200 < mc_image_y < 360:
+    '''if 200 < mc_image_x < 360 and 200 < mc_image_y < 360:
 
         vie -= 1
         mc_image_x = 450
@@ -196,6 +168,6 @@ while running:
 
             running = False
             pygame.quit()
-            print("Le jeu est terminé.")
+            print("Le jeu est terminé.")'''
 
     pygame.display.flip()
