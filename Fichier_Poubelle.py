@@ -293,6 +293,7 @@ def jeu():
     pygame.quit()
 
 
+'''
 def menu():
 
     import pygame
@@ -337,6 +338,7 @@ def menu():
         menu_screen.blit(bouton3, (screen_width//2 - bouton3.get_width()//2, 300))
 
         pygame.display.flip()
+'''
 
 
-menu()
+jeu()
