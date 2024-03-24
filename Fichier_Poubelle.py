@@ -293,4 +293,50 @@ def jeu():
     pygame.quit()
 
 
-jeu()
+def menu():
+
+    import pygame
+
+    pygame.init()
+    pygame.font.init()
+
+    screen_width = 1080
+    screen_height = 720
+
+    menu_screen = pygame.display.set_mode((screen_width, screen_height))
+    pygame.display.set_caption("Paris Survival Games - Menu")
+
+    font = pygame.font.Font(None, 36)
+
+    logo = pygame.image.load("images/Paris_Survival_Games_Logo.png")
+
+    clock = pygame.time.Clock()
+    clock.tick(60)
+
+    menu_running = True
+    while menu_running:
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                menu_running = False
+                pygame.quit()
+
+        menu_screen.blit(logo, (0, 0))
+
+        # Titre "Menu"
+        title_text = font.render("Menu", True, (255, 255, 255))
+        menu_screen.blit(title_text, (screen_width//2 - title_text.get_width()//2, 100))
+
+        # Options du menu
+        bouton1 = font.render("Jouer", True, (255, 255, 255))
+        bouton2 = font.render("Options", True, (255, 255, 255))
+        bouton3 = font.render("Quitter", True, (255, 255, 255))
+
+        menu_screen.blit(bouton1, (screen_width//2 - bouton1.get_width()//2, 200))
+        menu_screen.blit(bouton2, (screen_width//2 - bouton2.get_width()//2, 250))
+        menu_screen.blit(bouton3, (screen_width//2 - bouton3.get_width()//2, 300))
+
+        pygame.display.flip()
+
+
+menu()
