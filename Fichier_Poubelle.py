@@ -1,220 +1,296 @@
-# Importation des différents modules
-from config import *
-import pygame
+def jeu():
+    import pygame
+    pygame.init()
+    pygame.font.init()
 
-pygame.init()
-pygame.font.init()
+    # Déclaration des variables liées à l'écran principal
 
-# Création de l'écran principal
+    screen_width = 1080
+    screen_height = 720
+    fps = 60
 
-pygame.display.set_caption("Paris Survival Games - Tir a l'arc ! ")
-pygame.display.set_icon(logo)
-main_screen = pygame.display.set_mode((screen_width, screen_height))
+    # Chargement du logo
+    logo = pygame.image.load("images/Paris_Survival_Games_Logo.png")
 
-# Initialisation gérant animation pendant déplacement
+    # Chargement de la couleur de fond
+    main_screen_color = (34, 139, 34)
 
-mc_image_liste = [mc_image_profil1_scaled, mc_image_profil2_scaled, mc_image_profil3_scaled, mc_image_profil4_scaled]
-frame_actuelle = 0
-frame_compteur = 0
+    # Déclaration des variables liées au joueur et son apparence
 
-mc_image_x = 450
-mc_image_y = 300
+    # mc_image_face1 = pygame.image.load("images/Main_Character_1.png")
+    # mc_image_face2 = pygame.image.load("images/Main_Character_2.png")
+    mc_image_face3 = pygame.image.load("images/Main_Character_3.png")
+    mc_image_profil1 = pygame.image.load("images/Ethan profil-1.png.png")
+    mc_image_profil2 = pygame.image.load("images/Ethan profil-2.png.png")
+    mc_image_profil3 = pygame.image.load("images/Ethan profil-3.png.png")
+    mc_image_profil4 = pygame.image.load("images/Ethan profil-4.png.png")
+    mc_image_profil1_scaled = pygame.transform.scale_by(mc_image_profil1, 6)
+    mc_image_profil2_scaled = pygame.transform.scale_by(mc_image_profil2, 6)
+    mc_image_profil3_scaled = pygame.transform.scale_by(mc_image_profil3, 6)
+    mc_image_profil4_scaled = pygame.transform.scale_by(mc_image_profil4, 6)
 
-clock = pygame.time.Clock()
+    vitesse = 5
 
-# Boucle du jeu
+    # Déclaration des variables liées au score
 
-running = True
-while running:
+    vie_1_originale = pygame.image.load("images/autres/Vie 1.png")
+    vie_2_originale = pygame.image.load("images/autres/Vie 2.png")
+    vie_3_originale = pygame.image.load("images/autres/Vie 3.png")
+    vie_4_originale = pygame.image.load("images/autres/Vie 4.png")
+    vie_5_originale = pygame.image.load("images/autres/Vie 5.png")
+    vie_1 = pygame.transform.scale_by(vie_1_originale, 6)
+    vie_2 = pygame.transform.scale_by(vie_2_originale, 6)
+    vie_3 = pygame.transform.scale_by(vie_3_originale, 6)
+    vie_4 = pygame.transform.scale_by(vie_4_originale, 6)
+    vie_5 = pygame.transform.scale_by(vie_5_originale, 6)
 
-    clock.tick(fps)
+    # Création des variables liées au tir de la flèche
 
-    main_screen.fill(main_screen_color)
-    main_screen.blit(bg_tir_a_larc, (80, 0))
+    fleche_original = pygame.image.load("images/autres/Fleche.png")
+    fleche = pygame.transform.scale_by(fleche_original, 2)
 
-    # Affichage du personnage
+    bg_tir_a_larc = pygame.image.load("images/tir_a_larc.png")
 
-    for event in pygame.event.get():
+    # Création des variables liées à la cible
 
-        if event.type == pygame.QUIT:
-            running = False
-            pygame.quit()
-            print("Le jeu est terminé.")
+    cible_originale = pygame.image.load("images/target.png")
+    cible = pygame.transform.scale_by(cible_originale, 6.5)
 
-    # gestion des déplacements
+    vitesse_cible = 8  # avant: 5
+    mvt_cible = True
+    cible_x = 720
+    cible_y = 0
 
-    mouvement = False
+    # Création des variables d'affichage de texte
 
-    keys = pygame.key.get_pressed()
+    rouge = (255, 0, 0)
+    font = pygame.font.Font(None, 60)
+    text_surface = font.render("Attention, vous mordez la ligne!", True, rouge)
 
-    if all(not key for key in keys):
+    # Chargement de l'arc
 
-        main_screen.blit(mc_image_face3, (mc_image_x, mc_image_y))
+    arc_original = pygame.image.load("images/arc.png")
+    arc = pygame.transform.scale_by(arc_original, 3)
 
-    elif (keys[pygame.K_RIGHT] and mc_image_x + vitesse <= screen_width - 500
-          or keys[pygame.K_d] and mc_image_x + vitesse <= screen_width - 500):
+    # Déclaration du score
 
-        # Contrôle des déplacements vers la droite
-        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
-        mc_image_x += vitesse
-        mouvement = True
+    score = 0
+    jaune = (255, 255, 0)
+    text_score = font.render("Dernière flèche pour gagner!", True, jaune)
 
-    elif (keys[pygame.K_LEFT] and mc_image_x >= 0
-          or keys[pygame.K_q] and mc_image_x >= 0):
+    # Création de l'écran principal
 
-        # Contrôle des déplacements vers la gauche
-        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
-        mc_image_x -= vitesse
-        mouvement = True
+    pygame.display.set_caption("Paris Survival Games - Tir a l'arc ! ")
+    pygame.display.set_icon(logo)
+    main_screen = pygame.display.set_mode((screen_width, screen_height))
 
-    elif (keys[pygame.K_UP] and mc_image_y >= 0
-          or keys[pygame.K_z] and mc_image_y >= 0):
+    # liste gérant l'animation pendant le déplacement
 
-        # Contrôle des déplacements vers le haut
-        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
-        mc_image_y -= vitesse
-        mouvement = True
+    mc_image_liste = [mc_image_profil1_scaled, mc_image_profil2_scaled, mc_image_profil3_scaled,
+                      mc_image_profil4_scaled]
+    frame_actuelle = 0
+    frame_compteur = 0
 
-    elif (keys[pygame.K_DOWN] and mc_image_y - vitesse <= screen_height - 210
-          or keys[pygame.K_s] and mc_image_y - vitesse <= screen_height - 210):
+    mc_image_x = 450
+    mc_image_y = 300
 
-        # Contrôle des déplacements vers le bas
-        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
-        mc_image_y += vitesse
-        mouvement = True
+    clock = pygame.time.Clock()
 
-    elif mc_image_y == - 5:
-        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
-        main_screen.blit(text_surface, (180, 220))
+    # Boucle du jeu
 
-    elif mc_image_y == 520:
-        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
-        main_screen.blit(text_surface, (180, 220))
+    running = True
+    while running:
 
-    elif mc_image_x == - 5:
-        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
-        main_screen.blit(text_surface, (180, 220))
+        clock.tick(fps)
 
-    elif mc_image_x == 580:
-        main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
-        main_screen.blit(text_surface, (180, 220))
+        main_screen.fill(main_screen_color)
+        main_screen.blit(bg_tir_a_larc, (80, 0))
 
-    elif keys[pygame.K_SPACE]:
+        # Affichage du personnage
 
-        fleche_x = mc_image_x + 100
-        fleche_y = mc_image_y + 50
+        for event in pygame.event.get():
 
-        while fleche_x < 980:
-
-            fleche_rect = fleche.get_rect(topleft=(fleche_x, fleche_y))
-            cible_rect = cible.get_rect(topleft=(cible_x + 120, cible_y))
-            main_screen.fill(main_screen_color)
-            main_screen.blit(bg_tir_a_larc, (80, 0))
-            main_screen.blit(cible, (cible_x + 120, cible_y))
-            main_screen.blit(arc, (mc_image_x + 95, mc_image_y + 40))
-
-            main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
-
-            fleche_x = fleche_x + 20
-
-            if cible_rect.colliderect(fleche_rect):
-                # Collision detected, perform actions here
-                score += 1
-
-            main_screen.blit(fleche, (fleche_x, fleche_y))
-
-            if mvt_cible:
-                cible_y += vitesse_cible - 1
-                if cible_y >= 500:  # Si la cible atteint la limite basse
-                    cible_y = 500
-                    mvt_cible = False  # Changer la direction
-            else:  # Si la cible se déplace vers le haut
-                cible_y -= vitesse_cible - 1
-                if cible_y <= 0:  # Si la cible atteint la limite haute
-                    cible_y = 0
-                    mvt_cible = True
-            main_screen.blit(cible, (cible_x + 120, cible_y))
-
-            if 49 < score < 59:
-
-                main_screen.blit(vie_5, (750, -65))
-                main_screen.blit(text_score, (100, 220))
-
-            elif 39 < score < 49:
-
-                main_screen.blit(vie_4, (775, -60))
-
-            elif 29 < score < 39:
-
-                main_screen.blit(vie_3, (795, -60))
-
-            elif 19 < score < 29:
-
-                main_screen.blit(vie_2, (815, -60))
-
-            elif 9 < score < 19:
-
-                main_screen.blit(vie_1, (835, -60))
-
-            elif score >= 60:
-
+            if event.type == pygame.QUIT:
                 running = False
                 pygame.quit()
                 print("Le jeu est terminé.")
 
-            pygame.display.flip()
+        # gestion des déplacements
 
-    # Contrôle de la cible en dehors de l'animation de la flèche
+        mouvement = False
 
-    if mvt_cible:
-        cible_y += vitesse_cible
-        if cible_y >= 500:  # Si la cible atteint la limite basse
-            cible_y = 500
-            mvt_cible = False  # Changer la direction
-    else:  # Si la cible se déplace vers le haut
-        cible_y -= vitesse_cible
-        if cible_y <= 0:  # Si la cible atteint la limite haute
-            cible_y = 0
-            mvt_cible = True
-    main_screen.blit(cible, (cible_x + 120, cible_y))
-    # Changement d'images selon le mouvement du personnage
+        keys = pygame.key.get_pressed()
 
-    if mouvement:
+        if all(not key for key in keys):
 
-        frame_compteur += 1
+            main_screen.blit(mc_image_face3, (mc_image_x, mc_image_y))
 
-        if frame_compteur % 10 == 0:
-            frame_actuelle = (frame_actuelle + 1) % len(mc_image_liste)
+        elif (keys[pygame.K_RIGHT] and mc_image_x + vitesse <= screen_width - 500
+              or keys[pygame.K_d] and mc_image_x + vitesse <= screen_width - 500):
 
-    # Contrôle du nombre de vies
+            # Contrôle des déplacements vers la droite
+            main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+            mc_image_x += vitesse
+            mouvement = True
 
-    if 49 < score < 59:
+        elif (keys[pygame.K_LEFT] and mc_image_x >= 0
+              or keys[pygame.K_q] and mc_image_x >= 0):
 
-        main_screen.blit(vie_5, (750, -65))
-        main_screen.blit(text_score, (100, 220))
+            # Contrôle des déplacements vers la gauche
+            main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+            mc_image_x -= vitesse
+            mouvement = True
 
-    elif 39 < score < 49:
+        elif (keys[pygame.K_UP] and mc_image_y >= 0
+              or keys[pygame.K_z] and mc_image_y >= 0):
 
-        main_screen.blit(vie_4, (775, -60))
+            # Contrôle des déplacements vers le haut
+            main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+            mc_image_y -= vitesse
+            mouvement = True
 
-    elif 29 < score < 39:
+        elif (keys[pygame.K_DOWN] and mc_image_y - vitesse <= screen_height - 210
+              or keys[pygame.K_s] and mc_image_y - vitesse <= screen_height - 210):
 
-        main_screen.blit(vie_3, (795, -60))
+            # Contrôle des déplacements vers le bas
+            main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+            mc_image_y += vitesse
+            mouvement = True
 
-    elif 19 < score < 29:
+        elif mc_image_y == - 5:
+            main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+            main_screen.blit(text_surface, (180, 220))
 
-        main_screen.blit(vie_2, (815, -60))
+        elif mc_image_y == 520:
+            main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+            main_screen.blit(text_surface, (180, 220))
 
-    elif 9 < score < 19:
+        elif mc_image_x == - 5:
+            main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+            main_screen.blit(text_surface, (180, 220))
 
-        main_screen.blit(vie_1, (835, -60))
+        elif mc_image_x == 580:
+            main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+            main_screen.blit(text_surface, (180, 220))
 
-    elif score >= 60:
+        elif keys[pygame.K_SPACE]:
 
-        running = False
-        pygame.quit()
-        print("Le jeu est terminé.")
+            fleche_x = mc_image_x + 100
+            fleche_y = mc_image_y + 50
 
-    pygame.display.flip()
+            while fleche_x < 980:
 
-pygame.quit()
+                fleche_rect = fleche.get_rect(topleft=(fleche_x, fleche_y))
+                cible_rect = cible.get_rect(topleft=(cible_x + 120, cible_y))
+                main_screen.fill(main_screen_color)
+                main_screen.blit(bg_tir_a_larc, (80, 0))
+                main_screen.blit(cible, (cible_x + 120, cible_y))
+                main_screen.blit(arc, (mc_image_x + 95, mc_image_y + 40))
+
+                main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
+
+                fleche_x = fleche_x + 20
+
+                if cible_rect.colliderect(fleche_rect):
+                    # Collision detected, perform actions here
+                    score += 1
+
+                main_screen.blit(fleche, (fleche_x, fleche_y))
+
+                if mvt_cible:
+                    cible_y += vitesse_cible - 1
+                    if cible_y >= 500:  # Si la cible atteint la limite basse
+                        cible_y = 500
+                        mvt_cible = False  # Changer la direction
+                else:  # Si la cible se déplace vers le haut
+                    cible_y -= vitesse_cible - 1
+                    if cible_y <= 0:  # Si la cible atteint la limite haute
+                        cible_y = 0
+                        mvt_cible = True
+                main_screen.blit(cible, (cible_x + 120, cible_y))
+
+                if 49 < score < 59:
+
+                    main_screen.blit(vie_5, (750, -65))
+                    main_screen.blit(text_score, (100, 220))
+
+                elif 39 < score < 49:
+
+                    main_screen.blit(vie_4, (775, -60))
+
+                elif 29 < score < 39:
+
+                    main_screen.blit(vie_3, (795, -60))
+
+                elif 19 < score < 29:
+
+                    main_screen.blit(vie_2, (815, -60))
+
+                elif 9 < score < 19:
+
+                    main_screen.blit(vie_1, (835, -60))
+
+                elif score >= 60:
+
+                    running = False
+                    pygame.quit()
+                    print("Le jeu est terminé.")
+
+                pygame.display.flip()
+
+        # Contrôle de la cible en dehors de l'animation de la flèche
+
+        if mvt_cible:
+            cible_y += vitesse_cible
+            if cible_y >= 500:  # Si la cible atteint la limite basse
+                cible_y = 500
+                mvt_cible = False  # Changer la direction
+        else:  # Si la cible se déplace vers le haut
+            cible_y -= vitesse_cible
+            if cible_y <= 0:  # Si la cible atteint la limite haute
+                cible_y = 0
+                mvt_cible = True
+        main_screen.blit(cible, (cible_x + 120, cible_y))
+        # Changement d'images selon le mouvement du personnage
+
+        if mouvement:
+
+            frame_compteur += 1
+
+            if frame_compteur % 10 == 0:
+                frame_actuelle = (frame_actuelle + 1) % len(mc_image_liste)
+
+        # Contrôle du nombre de vies
+
+        if 49 < score < 59:
+
+            main_screen.blit(vie_5, (750, -65))
+            main_screen.blit(text_score, (100, 220))
+
+        elif 39 < score < 49:
+
+            main_screen.blit(vie_4, (775, -60))
+
+        elif 29 < score < 39:
+
+            main_screen.blit(vie_3, (795, -60))
+
+        elif 19 < score < 29:
+
+            main_screen.blit(vie_2, (815, -60))
+
+        elif 9 < score < 19:
+
+            main_screen.blit(vie_1, (835, -60))
+
+        elif score >= 60:
+
+            running = False
+            pygame.quit()
+            print("Le jeu est terminé.")
+
+        pygame.display.flip()
+    pygame.quit()
+
+
+jeu()
