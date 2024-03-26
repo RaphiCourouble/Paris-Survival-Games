@@ -1,5 +1,5 @@
 # Importation des différents modules
-from config import *
+from config_Jeu_1 import *
 import pygame
 
 pygame.init()
