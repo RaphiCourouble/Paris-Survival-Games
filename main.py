@@ -65,7 +65,7 @@ def jeu():
 
     rouge = (255, 0, 0)
     font = pygame.font.Font(None, 60)
-    text_surface = font.render("Attention, vous mordez la ligne!", True, rouge)
+    texte_collisions = font.render("Attention, vous mordez la ligne!", True, rouge)
 
     # Chargement de l'arc
 
@@ -76,7 +76,7 @@ def jeu():
 
     score = 0
     jaune = (255, 255, 0)
-    text_score = font.render("Dernière flèche pour gagner!", True, jaune)
+    texte_score = font.render("Dernière flèche pour gagner!", True, jaune)
 
     # Création de l'écran principal
 
@@ -159,19 +159,19 @@ def jeu():
 
         elif mc_image_y == - 5:
             main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
-            main_screen.blit(text_surface, (180, 220))
+            main_screen.blit(texte_collisions, (180, 220))
 
         elif mc_image_y == 520:
             main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
-            main_screen.blit(text_surface, (180, 220))
+            main_screen.blit(texte_collisions, (180, 220))
 
         elif mc_image_x == - 5:
             main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
-            main_screen.blit(text_surface, (180, 220))
+            main_screen.blit(texte_collisions, (180, 220))
 
         elif mc_image_x == 580:
             main_screen.blit(mc_image_liste[frame_actuelle], (mc_image_x, mc_image_y))
-            main_screen.blit(text_surface, (180, 220))
+            main_screen.blit(texte_collisions, (180, 220))
 
         elif keys[pygame.K_SPACE]:
 
@@ -212,7 +212,7 @@ def jeu():
                 if 49 < score < 59:
 
                     main_screen.blit(vie_5, (750, -65))
-                    main_screen.blit(text_score, (100, 220))
+                    main_screen.blit(texte_score, (100, 220))
 
                 elif 39 < score < 49:
 
@@ -233,7 +233,6 @@ def jeu():
                 elif score >= 60:
 
                     running = False
-                    pygame.quit()
                     print("Le jeu est terminé.")
 
                 pygame.display.flip()
@@ -251,6 +250,7 @@ def jeu():
                 cible_y = 0
                 mvt_cible = True
         main_screen.blit(cible, (cible_x + 120, cible_y))
+
         # Changement d'images selon le mouvement du personnage
 
         if mouvement:
@@ -265,7 +265,7 @@ def jeu():
         if 49 < score < 59:
 
             main_screen.blit(vie_5, (750, -65))
-            main_screen.blit(text_score, (100, 220))
+            main_screen.blit(texte_score, (100, 220))
 
         elif 39 < score < 49:
 
@@ -286,14 +286,73 @@ def jeu():
         elif score >= 60:
 
             running = False
-            pygame.quit()
             print("Le jeu est terminé.")
 
         pygame.display.flip()
-    pygame.quit()
+    menu()
 
 
-'''
+def aide():
+    import pygame
+
+    pygame.init()
+    pygame.font.init()
+
+    screen_width = 1080
+    screen_height = 720
+
+    aide_screen = pygame.display.set_mode((screen_width, screen_height))
+    pygame.display.set_caption("Paris Survival Games - Aide")
+
+    font = pygame.font.Font(None, 36)
+
+    # logo = pygame.image.load("images/Paris_Survival_Games_Logo.png")
+
+    texte_aide1 = font.render(
+        "Pour le jeu 1, déplacez vous avec les touches Z-Q-S-D ou les flèches directionnelles.", True,
+        (0, 100, 180))
+    texte_aide2 = font.render(
+        "Pour tirer une flèche, appuyez sur la touche espace. Ne vous déplacez pas en même temps ! ", True,
+        (0, 100, 180))
+
+    texte_aide3 = font.render(
+        "Aide pour le jeu 3 à définir ... ", True,
+        (0, 100, 180))
+
+    clock = pygame.time.Clock()
+    clock.tick(60)
+
+    aide_running = True
+    while aide_running:
+
+        # aide_screen.blit(logo, (-100, -250))
+        aide_screen.fill((255, 203, 96))
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                aide_running = False
+                pygame.quit()
+                print("Le jeu est terminé.")
+
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+
+                if 450 < mouse_x < 650 and 500 < mouse_y < 550:
+                    menu()
+
+        aide_screen.blit(texte_aide1, (30, 50))
+        aide_screen.blit(texte_aide2, (12, 90))
+        aide_screen.blit(texte_aide3, (350, 350))
+
+        bouton_retour_rect = pygame.Rect(450, 500, 200, 50)
+        pygame.draw.rect(aide_screen, (255, 220, 120), bouton_retour_rect)
+        bouton_retour_texte = font.render("Retour", True, (132, 132, 132))
+        aide_screen.blit(bouton_retour_texte, (505, 515))
+
+        pygame.display.flip()
+        clock.tick(60)
+
+
 def menu():
 
     import pygame
@@ -317,27 +376,64 @@ def menu():
     menu_running = True
     while menu_running:
 
+        menu_screen.blit(logo, (-100, -250))
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 menu_running = False
                 pygame.quit()
+                print("Le jeu est terminé.")
 
-        menu_screen.blit(logo, (0, 0))
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = pygame.mouse.get_pos()
 
-        # Titre "Menu"
-        title_text = font.render("Menu", True, (255, 255, 255))
-        menu_screen.blit(title_text, (screen_width//2 - title_text.get_width()//2, 100))
+                if 450 < mouse_x < 650 and 290 < mouse_y < 340:
+                    jeu()
 
-        # Options du menu
-        bouton1 = font.render("Jouer", True, (255, 255, 255))
-        bouton2 = font.render("Options", True, (255, 255, 255))
-        bouton3 = font.render("Quitter", True, (255, 255, 255))
+                elif 450 < mouse_x < 650 and 360 < mouse_y < 410:
+                    jeu()
 
-        menu_screen.blit(bouton1, (screen_width//2 - bouton1.get_width()//2, 200))
-        menu_screen.blit(bouton2, (screen_width//2 - bouton2.get_width()//2, 250))
-        menu_screen.blit(bouton3, (screen_width//2 - bouton3.get_width()//2, 300))
+                elif 450 < mouse_x < 650 and 430 < mouse_y < 480:
+                    aide()
+
+                elif 450 < mouse_x < 650 and 500 < mouse_y < 550:
+                    pygame.quit()
+
+        # Affichage de personnages (décoration)
+
+        ethan = pygame.image.load("images/Main_Character_1.png")
+        gabriel = pygame.image.load("images/Gabriel-1.png.png")
+
+        ethan_scaled = pygame.transform.scale_by(ethan, 1.5)
+        gabriel_scaled = pygame.transform.scale_by(gabriel, 9)
+
+        menu_screen.blit(ethan_scaled, (150, 290))
+        menu_screen.blit(gabriel_scaled, (700, 290))
+
+        # Affichage des boutons
+
+        bouton_jeu1_rect = pygame.Rect(450, 290, 200, 50)  # --> Rect(left, top, width, height)
+        pygame.draw.rect(menu_screen, (255, 203, 96), bouton_jeu1_rect)
+        bouton_jeu1_texte = font.render("Jeu 1", True, (132, 132, 132))
+        menu_screen.blit(bouton_jeu1_texte, (520, 305))
+
+        bouton_jeu2_rect = pygame.Rect(450, 360, 200, 50)
+        pygame.draw.rect(menu_screen, (255, 203, 96), bouton_jeu2_rect)
+        bouton_jeu2_texte = font.render("Jeu 2", True, (132, 132, 132))
+        menu_screen.blit(bouton_jeu2_texte, (520, 375))
+
+        bouton_jeu3_rect = pygame.Rect(450, 430, 200, 50)
+        pygame.draw.rect(menu_screen, (255, 203, 96), bouton_jeu3_rect)
+        bouton_jeu3_texte = font.render("Aide", True, (132, 132, 132))
+        menu_screen.blit(bouton_jeu3_texte, (520, 445))
+
+        bouton_jeu4_rect = pygame.Rect(450, 500, 200, 50)
+        pygame.draw.rect(menu_screen, (255, 203, 96), bouton_jeu4_rect)
+        bouton_jeu4_texte = font.render("Quitter", True, (255, 0, 0))
+        menu_screen.blit(bouton_jeu4_texte, (505, 515))
 
         pygame.display.flip()
-'''
+        clock.tick(60)
 
-jeu()
+
+menu()
