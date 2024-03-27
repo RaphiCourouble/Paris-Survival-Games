@@ -331,7 +331,7 @@ def aide():
         (0, 100, 180))
 
     texte_aide3 = font.render(
-        "Aide pour le jeu 3 à définir ... ", True,
+        "Pour le jeu 2, sautez en appuyant sur la touche espace. Évitez les barrières sinon, perdu!  ", True,
         (0, 100, 180))
 
     clock = pygame.time.Clock()
@@ -355,9 +355,9 @@ def aide():
                 if 450 < mouse_x < 650 and 500 < mouse_y < 550:
                     menu()
 
-        aide_screen.blit(texte_aide1, (30, 50))
-        aide_screen.blit(texte_aide2, (12, 90))
-        aide_screen.blit(texte_aide3, (350, 350))
+        aide_screen.blit(texte_aide1, (30, 90))
+        aide_screen.blit(texte_aide2, (12, 130))
+        aide_screen.blit(texte_aide3, (10, 350))
 
         bouton_retour_rect = pygame.Rect(450, 500, 200, 50)
         pygame.draw.rect(aide_screen, (255, 220, 120), bouton_retour_rect)
