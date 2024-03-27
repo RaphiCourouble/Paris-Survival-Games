@@ -1,4 +1,12 @@
-def jeu():
+def jeu1():
+
+    """
+    La fonction jeu1 contient toutes les variables nécessaires au bon fonctionnement du jeu numéro 1.
+    Elle gère les fonctionnalités importantes comme l'affichage du fond, du personnage, des déplacements, du tir,
+    des collisions, du mouvement de la cible et du score.
+    Une fois le jeu fini, on appelle la fonction menu().
+    """
+
     import pygame
     pygame.init()
     pygame.font.init()
@@ -293,6 +301,13 @@ def jeu():
 
 
 def aide():
+
+    """
+    La fonction aide contient simplement le texte nécessaire à la page 'aide' du menu.
+    Une fois le texte généré, on l'affiche où l'on souhaite.
+    On affiche également un bouton 'menu' pour nous renvoyer au menu en appelant la fonction menu()
+    """
+
     import pygame
 
     pygame.init()
@@ -355,6 +370,12 @@ def aide():
 
 def menu():
 
+    """
+    La fonction menu() génère et affiche tous les éléments du menu.
+    Les boutons redirigent respectivement vers : le jeu 1, le jeu 2, l'aide et retour en appelant
+    respectivement : jeu1(), jeu2(), aide() et menu()
+    """
+
     import pygame
 
     pygame.init()
@@ -388,10 +409,10 @@ def menu():
                 mouse_x, mouse_y = pygame.mouse.get_pos()
 
                 if 450 < mouse_x < 650 and 290 < mouse_y < 340:
-                    jeu()
+                    jeu1()
 
                 elif 450 < mouse_x < 650 and 360 < mouse_y < 410:
-                    jeu()
+                    jeu1()
 
                 elif 450 < mouse_x < 650 and 430 < mouse_y < 480:
                     aide()
