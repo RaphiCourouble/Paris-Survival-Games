@@ -6,7 +6,7 @@ Nous avons conçu un jeu vidéo pour les trophées NSI permettant à l'utilisate
 
 <i>Contexte:</i>
 
-Chaque année, des jeux sportifs sont organisés afin de déterminer quel arrondissement aura le plus de ressources. Tous les arrondissements étant touchés et détruits par la famine, des représentants de chaque arrondissement (un homme et une femme) doivent concourir pour devenir le ou la grande gagnante de Paris qui bénéficieront de ressources presque illimitées pour le reste de leur vie. A l'inverse, les perdants sont exécutés. Ces jeux se déroulent dans le 5ème arrondissement d'un Paris dystopique où l'on peut retrouver un capitole, où se deroule les épreuves.
+Chaque année, des jeux sportifs sont organisés afin de déterminer quel arrondissement aura le plus de ressources. Tous les arrondissements étant touchés et détruits par la famine, des représentants de chaque arrondissement (un homme et une femme) doivent concourir pour devenir le ou la grande gagnante de Paris qui bénéficieront de ressources presque illimitées pour le reste de leur vie. A l'inverse, les perdants sont exécutés. Ces jeux se déroulent dans le 5ème arrondissement d'un Paris dystopique où l'on peut retrouver un capitole, dans lequel se deroule les épreuves.
 
 <i>Nos inspirations:</i>
 
