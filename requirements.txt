@@ -1,13 +1,11 @@
-Pour lancer le jeu, il suffit d'installer la librairie Pygame !
-
-Notre version: pygame~=2.5.2
+Pour lancer le jeu, il suffit d'installer la librairie Pygame ! (pour information, nous avons utilisé Pygame 2.5.2)
 
 Cela peut se faire de plusieurs manières, voici les plus courantes:
-- Directement depuis la console de votre IDE, tapez --> pip install pygame
+- Directement depuis la console de votre IDE, tapez la commande "pip install pygame"
 - Installez la librairie depuis l'interface de votre IDE
-- Sur PyCharm, vous pouvez accéder à la gestion de librairies en exécutant CTRL + ALT + S
+- Sur PyCharm, vous pouvez accéder à la gestion des librairies en exécutant CTRL + ALT + S
 
-Un fois Pygame installé, lancez le fichier python (extension .py) contenant le jeu, et à vous l'aventure!
+Un fois Pygame installé, lancez le fichier python (.py) contenant le jeu, et à vous l'aventure!
 Bon jeu! ;)
-L'équipe des Paris Survival Games, Clara, Clément, Lara, Raphaël
 
+L'équipe des Paris Survival Games, Clara, Clément, Lara, Raphaël
